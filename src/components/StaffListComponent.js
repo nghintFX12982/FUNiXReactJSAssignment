@@ -8,7 +8,7 @@ class StaffList extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">{staffName}</div>
+        <div className="row"></div>
         <div className="row">
           <div className="col-12">
             Bấm vào hình nhân viên để xem thông tin chi tiết
