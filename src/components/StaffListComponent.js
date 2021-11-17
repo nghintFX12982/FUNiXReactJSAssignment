@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardBody, CardTitle, CardGroup } from "reactstrap";
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardGroup,
+  UncontrolledCollapse,
+} from "reactstrap";
+import dateFormat from "dateformat";
 
 class StaffList extends Component {
   constructor(props) {
@@ -11,11 +20,28 @@ class StaffList extends Component {
       return (
         <CardGroup className="col-12 col-md-6 col-lg-4">
           <Card className="m-1" key={staff.id}>
-            <CardImg top src={staff.image} alt={staff.name} />
+            <CardImg
+              top
+              src={staff.image}
+              alt={staff.name}
+              id={"toggler" + staff.id}
+            />
+
             <CardBody>
               <CardTitle>
                 {staff.name} - {staff.department.name}
               </CardTitle>
+              <UncontrolledCollapse toggler={"#toggler" + staff.id}>
+                <CardText>
+                  Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}
+                </CardText>
+                <CardText>
+                  Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
+                </CardText>
+                <CardText>Phòng ban: {staff.department.name}</CardText>
+                <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
+                <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
+              </UncontrolledCollapse>
             </CardBody>
           </Card>
         </CardGroup>
