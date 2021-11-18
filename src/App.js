@@ -22,6 +22,16 @@ class App extends Component {
   }
 
   setLayout(colwidth) {
+    if (colwidth === null) return this.setState({ layout: null });
+
+    if (window.innerWidth < 500) {
+      return alert("Chỉ áp dụng với màn hình tablet và desktop");
+    }
+
+    if (window.innerWidth < 900 && colwidth <= 3) {
+      return alert("Chỉ áp dụng với màn hình desktop");
+    }
+
     this.setState({ layout: colwidth });
   }
 
