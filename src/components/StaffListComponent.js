@@ -30,12 +30,14 @@ class StaffList extends Component {
       return (
         <CardGroup className={cols}>
           <Card className="m-1" key={staff.id}>
-            <CardImg
-              top
-              src={staff.image}
-              alt={staff.name}
-              id={"toggler" + staff.id}
-            />
+            <div className="staff-img">
+              <CardImg
+                top
+                src={staff.image}
+                alt={staff.name}
+                id={"toggler" + staff.id}
+              />
+            </div>
 
             <CardBody>
               <CardTitle>
