@@ -55,7 +55,7 @@ class App extends Component {
             </Nav>
           </div>
         </Navbar>
-        <StaffList staffList={this.state.staffs} />
+        <StaffList columns={this.state.layout} staffList={this.state.staffs} />
       </div>
     );
   }

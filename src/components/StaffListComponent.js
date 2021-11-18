@@ -16,9 +16,19 @@ class StaffList extends Component {
   }
 
   render() {
+    let cols = "col-12 col-md-6 col-lg-4";
+    let colwidth = this.props.columns;
+    if (colwidth) {
+      cols =
+        "col-12 col-md-" +
+        (colwidth > 3 ? colwidth : 6) +
+        " col-lg-" +
+        colwidth;
+    }
+
     const staffName = this.props.staffList.map((staff) => {
       return (
-        <CardGroup className="col-12 col-md-6 col-lg-4">
+        <CardGroup className={cols}>
           <Card className="m-1" key={staff.id}>
             <CardImg
               top
