@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import NavBarDrop from "./components/NavBarDropComponent";
 import {
   Navbar,
   NavbarBrand,
@@ -38,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar dark color="info">
+        {/* <Navbar dark color="info">
           <div className="container">
             <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
             <Nav>
@@ -64,7 +65,8 @@ class App extends Component {
               </UncontrolledDropdown>
             </Nav>
           </div>
-        </Navbar>
+        </Navbar> */}
+        <NavBarDrop />
         <StaffList columns={this.state.layout} staffList={this.state.staffs} />
       </div>
     );
