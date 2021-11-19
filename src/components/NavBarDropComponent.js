@@ -21,17 +21,40 @@ class NavBarDrop extends Component {
                 Bố cục
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem onClick={() => this.setLayout(6)}>
+                <DropdownItem
+                  onClick={() => {
+                    this.props.onClick(12);
+                  }}
+                >
+                  1 cột
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() => {
+                    this.props.onClick(6);
+                  }}
+                >
                   2 cột
                 </DropdownItem>
-                <DropdownItem onClick={() => this.setLayout(4)}>
+                <DropdownItem
+                  onClick={() => {
+                    this.props.onClick(4);
+                  }}
+                >
                   3 cột
                 </DropdownItem>
-                <DropdownItem onClick={() => this.setLayout(3)}>
+                <DropdownItem
+                  onClick={() => {
+                    this.props.onClick(3);
+                  }}
+                >
                   4 cột
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem onClick={() => this.setLayout(null)}>
+                <DropdownItem
+                  onClick={() => {
+                    this.props.onClick(null);
+                  }}
+                >
                   Reset
                 </DropdownItem>
               </DropdownMenu>
