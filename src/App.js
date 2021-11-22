@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
-import { STAFFS } from "./shared/staffs";
+import { STAFFS, DEPARTMENTS } from "./shared/staffs";
 import Header from "./components/Header";
 import StaffPage from "./components/StaffPage";
 import StaffDetailPage from "./components/StaffDetailPage";
+import DepartmentPage from "./components/DepartmentPage";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       staffs: STAFFS,
+      departments: DEPARTMENTS,
     };
   }
 
@@ -40,6 +42,12 @@ class App extends Component {
             exact
           />
           <Route path="/staff/:staffId" component={StaffWithId} />
+          <Route
+            path="/department"
+            component={() => (
+              <DepartmentPage departmentList={this.state.departments} />
+            )}
+          />
 
           <Redirect from="/" to="/staff" exact />
         </Switch>
