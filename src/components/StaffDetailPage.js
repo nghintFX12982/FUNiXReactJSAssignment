@@ -17,7 +17,7 @@ const RenderBreadcrumb = ({ staff }) => {
 
 const RenderImage = ({ staff }) => {
   return (
-    <Card className="staff-img">
+    <Card>
       <CardImg top with="100%" src={staff.image} alt={staff.name} />
     </Card>
   );

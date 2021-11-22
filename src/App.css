@@ -38,16 +38,28 @@
 }
 
 /* Customize */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.container {
+  padding-top: 4rem;
+}
 
 .breadcrumb {
   background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
 }
 
 .staff-img {
   overflow: hidden;
 }
 
-img:hover {
+.staff-img img:hover {
   cursor: pointer;
   transform: scale(1.1);
   transition: all 0.5s ease-in-out;
