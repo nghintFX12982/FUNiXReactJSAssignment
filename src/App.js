@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import NavBarDrop from "./components/NavBarDropComponent";
 import StaffList from "./components/StaffListComponent";
 import { STAFFS } from "./shared/staffs";
+import Header from "./components/Header";
+import StaffPage from "./components/StaffPage";
 
 class App extends Component {
   constructor(props) {
@@ -30,8 +33,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavBarDrop onClick={(colwidth) => this.setLayout(colwidth)} />
-        <StaffList columns={this.state.layout} staffList={this.state.staffs} />
+        <Header />
+
+        <Switch>
+          <Route path="/staff" component={StaffPage} exact />
+          <Redirect from="/" to="/staff" />
+        </Switch>
       </div>
     );
   }
