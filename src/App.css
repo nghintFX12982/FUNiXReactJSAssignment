@@ -37,6 +37,12 @@
   }
 }
 
+/* Customize */
+
+.breadcrumb {
+  background-color: #fff;
+}
+
 .staff-img {
   overflow: hidden;
 }

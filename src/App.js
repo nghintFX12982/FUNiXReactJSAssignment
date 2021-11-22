@@ -36,7 +36,11 @@ class App extends Component {
         <Header />
 
         <Switch>
-          <Route path="/staff" component={StaffPage} exact />
+          <Route
+            path="/staff"
+            component={() => <StaffPage staffList={this.state.staffs} />}
+            exact
+          />
           <Redirect from="/" to="/staff" />
         </Switch>
       </div>
