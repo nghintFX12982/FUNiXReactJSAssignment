@@ -6,31 +6,29 @@ import StaffList from "./components/StaffListComponent";
 import { STAFFS } from "./shared/staffs";
 import Header from "./components/Header";
 import StaffPage from "./components/StaffPage";
+import StaffDetailPage from "./components/StaffDetailPage";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       staffs: STAFFS,
-      layout: null,
     };
   }
 
-  setLayout(colwidth) {
-    if (colwidth === null) return this.setState({ layout: null });
-
-    if (window.innerWidth < 500) {
-      return alert("Chỉ áp dụng với màn hình tablet và desktop");
-    }
-
-    if (window.innerWidth < 900 && colwidth <= 3) {
-      return alert("Chỉ áp dụng với màn hình desktop");
-    }
-
-    this.setState({ layout: colwidth });
-  }
-
   render() {
+    const StaffWithId = ({ match }) => {
+      return (
+        <StaffDetailPage
+          staff={
+            this.state.staffs.filter(
+              (staff) => staff.id === Number.parseInt(match.params.staffId, 10)
+            )[0]
+          }
+        />
+      );
+    };
+
     return (
       <div className="App">
         <Header />
@@ -41,7 +39,8 @@ class App extends Component {
             component={() => <StaffPage staffList={this.state.staffs} />}
             exact
           />
-          <Redirect from="/" to="/staff" />
+          <Route path="/staff/:staffId" component={StaffWithId} />
+          <Redirect from="/" to="/staff" exact />
         </Switch>
       </div>
     );

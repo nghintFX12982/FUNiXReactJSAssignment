@@ -13,23 +13,23 @@ import { Link } from "react-router-dom";
 const RenderBreadcrumb = () => {
   return (
     <Breadcrumb tag="nav" listTag="div">
-      <Link to="/staff">
-        <BreadcrumbItem tag="a" href="#">
-          Home
-        </BreadcrumbItem>
-      </Link>
+      <BreadcrumbItem>
+        <Link to="/staff">Nhân Viên</Link>
+      </BreadcrumbItem>
     </Breadcrumb>
   );
 };
 
 const RenderStaff = ({ staff }) => {
   return (
-    <Card className="staff-img">
-      <CardImg src={staff.image} alt={staff.name} />
-      <CardBody>
-        <CardTitle>{staff.name}</CardTitle>
-      </CardBody>
-    </Card>
+    <Link to={`/staff/${staff.id}`}>
+      <Card className="staff-img">
+        <CardImg src={staff.image} alt={staff.name} />
+        <CardBody>
+          <CardTitle>{staff.name}</CardTitle>
+        </CardBody>
+      </Card>
+    </Link>
   );
 };
 
@@ -37,7 +37,7 @@ const RenderStaff = ({ staff }) => {
 function StaffPage({ staffList }) {
   const staff = staffList.map((staff) => {
     return (
-      <div className="col-6 col-md-4 col-xl-2">
+      <div className="col-6 col-md-4 col-xl-2 my-2">
         <RenderStaff staff={staff} />
       </div>
     );
