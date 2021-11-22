@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import StaffPage from "./components/StaffPage";
 import StaffDetailPage from "./components/StaffDetailPage";
 import DepartmentPage from "./components/DepartmentPage";
+import SalaryPage from "./components/SalaryPage";
 
 class App extends Component {
   constructor(props) {
@@ -47,6 +48,10 @@ class App extends Component {
             component={() => (
               <DepartmentPage departmentList={this.state.departments} />
             )}
+          />
+          <Route
+            path="/salary"
+            component={() => <SalaryPage staffList={this.state.staffs} />}
           />
 
           <Redirect from="/" to="/staff" exact />
