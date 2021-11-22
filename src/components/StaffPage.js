@@ -20,9 +20,9 @@ const RenderBreadcrumb = () => {
   );
 };
 
-const RenderStaff = ({ staff }) => {
+const RenderStaff = ({ match, staff }) => {
   return (
-    <Link to={`/staff/${staff.id}`}>
+    <Link to={`${match.path}/${staff.id}`}>
       <Card className="staff-img">
         <CardImg src={staff.image} alt={staff.name} />
         <CardBody>
@@ -34,11 +34,11 @@ const RenderStaff = ({ staff }) => {
 };
 
 // ----- Presentational Component -----
-function StaffPage({ staffList }) {
+function StaffPage({ match, staffList }) {
   const staff = staffList.map((staff) => {
     return (
       <div className="col-6 col-md-4 col-xl-2 my-2">
-        <RenderStaff staff={staff} />
+        <RenderStaff staff={staff} match={match} />
       </div>
     );
   });

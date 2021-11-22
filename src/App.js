@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
-import NavBarDrop from "./components/NavBarDropComponent";
-import StaffList from "./components/StaffListComponent";
 import { STAFFS } from "./shared/staffs";
 import Header from "./components/Header";
 import StaffPage from "./components/StaffPage";
@@ -36,10 +34,13 @@ class App extends Component {
         <Switch>
           <Route
             path="/staff"
-            component={() => <StaffPage staffList={this.state.staffs} />}
+            component={({ match }) => (
+              <StaffPage staffList={this.state.staffs} match={match} />
+            )}
             exact
           />
           <Route path="/staff/:staffId" component={StaffWithId} />
+
           <Redirect from="/" to="/staff" exact />
         </Switch>
       </div>
