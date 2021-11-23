@@ -43,6 +43,16 @@ function SalaryPage({ staffList }) {
 
   return (
     <div className="container">
+      <div id="sort">
+        <span id="sort-inc">
+          <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sắp xếp tăng
+          dần
+        </span>
+        <span id="sort-dec">
+          <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Sắp xếp giảm
+          dần
+        </span>
+      </div>
       <div className="row">{staff}</div>
     </div>
   );
