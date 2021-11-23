@@ -61,7 +61,7 @@ const RenderSalary = ({ staff }) => {
           {formatDecimal(salary, {
             decimal: ".",
             thousands: ",",
-            precision: "0",
+            precision: 0,
           })}
         </CardText>
       </Card>
