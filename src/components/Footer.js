@@ -7,7 +7,7 @@ function Footer(props) {
     <div id="footer">
       <Jumbotron>
         <div className="row">
-          <div className="col-12 col-md-4">
+          <div className="col-12 col-md-6">
             <h1 className="display-5">Điều hướng</h1>
             <List type="unstyled">
               <li>
@@ -21,7 +21,7 @@ function Footer(props) {
               </li>
             </List>
           </div>
-          <div className="col-12 col-md-8">
+          <div className="col-12 col-md-6">
             <h1 className="display-5">Địa chỉ</h1>
             <p className="lead">
               121, Clear Water Bay Road Clear Water Bay, KowLoon HONG KONG
