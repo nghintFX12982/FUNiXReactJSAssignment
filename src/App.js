@@ -50,7 +50,9 @@ class App extends Component {
           />
           <Route
             path="/salary"
-            component={() => <SalaryPage staffList={this.state.staffs} />}
+            component={({ match }) => (
+              <SalaryPage staffList={this.state.staffs} match={match} />
+            )}
           />
 
           <Redirect from="/" to="/staff" exact />

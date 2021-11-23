@@ -22,14 +22,14 @@ const RenderBreadcrumb = () => {
 
 const RenderStaff = ({ match, staff }) => {
   return (
-    <Link to={`${match.path}/${staff.id}`}>
-      <Card className="staff-img">
+    <Card className="staff-img">
+      <Link to={`${match.path}/${staff.id}`}>
         <CardImg src={staff.image} alt={staff.name} />
-        <CardBody>
-          <CardTitle>{staff.name}</CardTitle>
-        </CardBody>
-      </Card>
-    </Link>
+      </Link>
+      <CardBody>
+        <CardTitle>{staff.name}</CardTitle>
+      </CardBody>
+    </Card>
   );
 };
 
