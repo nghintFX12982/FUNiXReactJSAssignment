@@ -19,10 +19,6 @@ const Header = (props) => {
   return (
     <div id="navbar" className="container-fluid">
       <Navbar color="light" light expand="md">
-        <RouterLink to="/staff">
-          <NavbarBrand>Logo</NavbarBrand>
-        </RouterLink>
-
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -48,7 +44,9 @@ const Header = (props) => {
               </RouterLink>
             </NavItem>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
+          <RouterLink to="/staff">
+            <NavbarText>Thông Tin Nhân Viên</NavbarText>
+          </RouterLink>
         </Collapse>
       </Navbar>
     </div>

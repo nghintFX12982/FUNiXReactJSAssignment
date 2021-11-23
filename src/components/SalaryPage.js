@@ -6,22 +6,21 @@ import { NavLink, Route, Switch } from "react-router-dom";
 const formatDecimal = require("format-decimal");
 const sortedStaffList = [...STAFFS];
 
-// ----- Sort Function -----
-
-function sortSalary(sorttype) {
-  if (sorttype === "inc") {
-    sortedStaffList.sort(function (a, b) {
-      return a.salary - b.salary;
-    });
-  } else {
-    sortedStaffList.sort(function (a, b) {
-      return b.salary - a.salary;
-    });
-  }
-}
-
 // ----- Container Component -----
 function SortBar({ match }) {
+  // Sort salary
+  const sortSalary = (sorttype) => {
+    if (sorttype === "inc") {
+      sortedStaffList.sort(function (a, b) {
+        return a.salary - b.salary;
+      });
+    } else {
+      sortedStaffList.sort(function (a, b) {
+        return b.salary - a.salary;
+      });
+    }
+  };
+
   return (
     <div id="sort">
       <NavLink to={`${match.path}/sort-inc`} onClick={() => sortSalary("inc")}>
