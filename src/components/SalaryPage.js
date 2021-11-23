@@ -2,53 +2,36 @@ import React from "react";
 import { Card, CardText, Jumbotron } from "reactstrap";
 import { STAFFS } from "../shared/staffs";
 import { NavLink, Route, Switch } from "react-router-dom";
-import { exact } from "prop-types";
 
 const formatDecimal = require("format-decimal");
 const sortedStaffList = [...STAFFS];
-// ----- Sort Function -----
-function sortInc(sortedStaffList) {
-  for (let i = 0; i <= sortedStaffList.length - 2; i++) {
-    for (let j = i + 1; j <= sortedStaffList.length - 1; j++) {
-      if (sortedStaffList[i].salary > sortedStaffList[j].salary) {
-        let temp = sortedStaffList[i];
-        sortedStaffList[i] = sortedStaffList[j];
-        sortedStaffList[j] = temp;
-      }
-    }
-  }
-}
 
-function sortDec(sortedStaffList) {
-  for (let i = 0; i <= sortedStaffList.length - 2; i++) {
-    for (let j = i + 1; j <= sortedStaffList.length - 1; j++) {
-      if (sortedStaffList[i].salary < sortedStaffList[j].salary) {
-        let temp = sortedStaffList[i];
-        sortedStaffList[i] = sortedStaffList[j];
-        sortedStaffList[j] = temp;
-      }
-    }
+// ----- Sort Function -----
+
+function sortSalary(sorttype) {
+  if (sorttype === "inc") {
+    sortedStaffList.sort(function (a, b) {
+      return a.salary - b.salary;
+    });
+  } else {
+    sortedStaffList.sort(function (a, b) {
+      return b.salary - a.salary;
+    });
   }
-  console.log(sortedStaffList);
 }
 
 // ----- Container Component -----
 function SortBar({ match }) {
   return (
     <div id="sort">
-      <NavLink
-        to={`${match.path}/sort-az`}
-        onClick={() => sortInc(sortedStaffList)}
-      >
+      <NavLink to={`${match.path}/sort-inc`} onClick={() => sortSalary("inc")}>
         <span id="sort-inc">
           <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sắp xếp tăng
           dần
         </span>
       </NavLink>
-      <NavLink
-        to={`${match.path}/sort-za`}
-        onClick={() => sortDec(sortedStaffList)}
-      >
+
+      <NavLink to={`${match.path}/sort-dec`} onClick={() => sortSalary("dec")}>
         <span id="sort-dec">
           <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Sắp xếp giảm
           dần
@@ -59,8 +42,13 @@ function SortBar({ match }) {
 }
 
 const RenderSalary = ({ staff }) => {
+  // Caculate salary & add to cloned array
   let salary = Number.parseInt(staff.salaryScale * 3000000, 10);
-  sortedStaffList[staff.id].salary = salary;
+  sortedStaffList.forEach((sortedStaff, index) => {
+    if (staff.id === sortedStaff.id) {
+      sortedStaffList[index].salary = salary;
+    }
+  });
 
   return (
     <Jumbotron style={{ textAlign: "left" }}>
@@ -84,6 +72,7 @@ const RenderSalary = ({ staff }) => {
 
 // ----- Presentational Component -----
 function SalaryPage({ staffList, match }) {
+  // Staff Component
   const Staff = ({ staffList }) => {
     const staff = staffList.map((staff) => {
       return (
@@ -98,7 +87,9 @@ function SalaryPage({ staffList, match }) {
 
   return (
     <div className="container">
+      {/* Bar for sort function */}
       <SortBar match={match} />
+      {/* Routing in salary page */}
       <Switch>
         <Route
           path={`${match.path}`}
@@ -106,12 +97,12 @@ function SalaryPage({ staffList, match }) {
           exact
         />
         <Route
-          path={`${match.path}/sort-az`}
+          path={`${match.path}/sort-inc`}
           component={() => <Staff staffList={sortedStaffList} />}
           exact
         />
         <Route
-          path={`${match.path}/sort-za`}
+          path={`${match.path}/sort-dec`}
           component={() => <Staff staffList={sortedStaffList} />}
           exact
         />
