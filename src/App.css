@@ -53,6 +53,7 @@
   top: 0;
   left: 0;
   z-index: 1;
+  width: 100%;
 }
 
 .staff-img img:hover {
@@ -70,7 +71,7 @@
 
 #sort {
   text-align: left;
-  padding: 12px;
+  padding: 8px;
   margin-bottom: 16px;
   border-bottom: 1px solid #ccc;
 }
@@ -82,4 +83,11 @@
 #sort span:hover {
   cursor: pointer;
   color: #037bff;
+}
+
+/* ---------- Footer ---------- */
+#footer .jumbotron {
+  text-align: left;
+  padding: 20px 50px 20px 50px;
+  margin: 32px 0 0 0;
 }

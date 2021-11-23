@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import { STAFFS, DEPARTMENTS } from "./shared/staffs";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import StaffPage from "./components/StaffPage";
 import StaffDetailPage from "./components/StaffDetailPage";
 import DepartmentPage from "./components/DepartmentPage";
@@ -57,6 +58,7 @@ class App extends Component {
 
           <Redirect from="/" to="/staff" exact />
         </Switch>
+        <Footer />
       </div>
     );
   }
