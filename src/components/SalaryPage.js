@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardText, Jumbotron } from "reactstrap";
 import { STAFFS } from "../shared/staffs";
-import { NavLink, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 
 const formatDecimal = require("format-decimal");
 const sortedStaffList = [...STAFFS];
@@ -23,19 +23,19 @@ function SortBar({ match }) {
 
   return (
     <div id="sort">
-      <NavLink to={`${match.path}/sort-inc`} onClick={() => sortSalary("inc")}>
+      <Link to={`${match.path}/sort-inc`} onClick={() => sortSalary("inc")}>
         <span id="sort-inc">
           <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sắp xếp tăng
           dần
         </span>
-      </NavLink>
+      </Link>
 
-      <NavLink to={`${match.path}/sort-dec`} onClick={() => sortSalary("dec")}>
+      <Link to={`${match.path}/sort-dec`} onClick={() => sortSalary("dec")}>
         <span id="sort-dec">
           <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Sắp xếp giảm
           dần
         </span>
-      </NavLink>
+      </Link>
     </div>
   );
 }
