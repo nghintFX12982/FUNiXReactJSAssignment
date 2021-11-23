@@ -1,15 +1,15 @@
 import React from "react";
 import { Card, CardText, Jumbotron } from "reactstrap";
+import { STAFFS } from "../shared/staffs";
 
 // ----- Container Component -----
 const formatDecimal = require("format-decimal");
 
 const RenderSalary = ({ staff }) => {
-  let salary = formatDecimal(staff.salaryScale * 3000000, {
-    decimal: ".",
-    precision: 0,
-    thousands: ",",
-  });
+  let salary = Number.parseInt(staff.salaryScale * 3000000, 10);
+
+  STAFFS[staff.id].salary = salary;
+  console.log(STAFFS);
 
   return (
     <Jumbotron style={{ textAlign: "left" }}>
@@ -18,7 +18,14 @@ const RenderSalary = ({ staff }) => {
       <p>Hệ số lương: {staff.salaryScale}</p>
       <p>Số giờ làm thêm: {staff.overTime}</p>
       <Card className="p-1">
-        <CardText>Lương: {salary}</CardText>
+        <CardText>
+          Lương:{" "}
+          {formatDecimal(salary, {
+            decimal: ".",
+            thousands: ",",
+            precision: "0",
+          })}
+        </CardText>
       </Card>
     </Jumbotron>
   );
