@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron } from "reactstrap";
 
-// ----- Container Component -----
+// ----- Presentational Component -----
 const RenderDepartment = ({ department }) => {
   return (
     <Jumbotron>
@@ -11,7 +11,7 @@ const RenderDepartment = ({ department }) => {
   );
 };
 
-// ----- Presentational Component -----
+// ----- Container Component -----
 function DepartmentPage({ departmentList }) {
   const department = departmentList.map((department) => {
     return (

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, Card, CardImg, List } from "reactstrap";
 import dateFormat from "dateformat";
 
-// ----- Container Component -----
+// ----- Presentational Component -----
 const RenderBreadcrumb = ({ staff }) => {
   return (
     <Breadcrumb tag="nav" listTag="div">
@@ -36,12 +36,13 @@ const RenderDetail = ({ staff }) => {
   );
 };
 
-// ----- Presentational Component -----
+// ----- Container Component -----
 function StaffDetailPage({ staff }) {
   return (
     <div className="container">
       {/* ---------- */}
       {/* Breadcrumb Section */}
+      {/* ---------- */}
       <div className="row">
         <div className="col-12">
           <RenderBreadcrumb staff={staff} />
@@ -49,6 +50,7 @@ function StaffDetailPage({ staff }) {
       </div>
       {/* ---------- */}
       {/* Image & Info Section */}
+      {/* ---------- */}
       <div className="row">
         <div className="col-12 col-md-4 col-xl-3">
           <RenderImage staff={staff} />

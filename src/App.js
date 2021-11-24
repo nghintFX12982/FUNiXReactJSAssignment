@@ -56,7 +56,7 @@ class App extends Component {
             )}
           />
 
-          <Redirect from="/" to="/staff" exact />
+          <Redirect from="/" to="/staff" />
         </Switch>
         <Footer />
       </div>

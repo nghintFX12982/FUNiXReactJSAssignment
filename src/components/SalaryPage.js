@@ -3,7 +3,7 @@ import { Card, CardText, Jumbotron } from "reactstrap";
 
 const formatDecimal = require("format-decimal");
 
-// ----- Container Component -----
+// ----- Presentational Component -----
 const RenderSalary = ({ staff, salary }) => {
   return (
     <Jumbotron style={{ textAlign: "left" }}>
@@ -25,7 +25,7 @@ const RenderSalary = ({ staff, salary }) => {
   );
 };
 
-// ----- Presentational Component -----
+// ----- Container Component -----
 function SalaryPage(props) {
   const [staffList, setStaffList] = useState(props.staffList);
   // Salary Calculation Feature
@@ -35,6 +35,7 @@ function SalaryPage(props) {
     return salaryScale * basicSalary + overTime * overTimeSalary;
   }
 
+  // Sort by salary will be triggerd when "sort" word is clicked
   function sortSalary(sorttype) {
     let sortedStaffList = [...staffList];
     let salaryA = 0;
@@ -74,6 +75,7 @@ function SalaryPage(props) {
     <div className="container">
       {/* ---------- */}
       {/* Sort Function Section */}
+      {/* ---------- */}
       <div id="sort" className="row">
         <span onClick={() => sortSalary("inc")}>
           <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
@@ -87,6 +89,7 @@ function SalaryPage(props) {
       </div>
       {/* ---------- */}
       {/* Render staff & salary Section */}
+      {/* ---------- */}
       <div className="row">{staff}</div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-// ----- Container Component -----
+// ----- Presentational Component -----
 const RenderBreadcrumb = ({ match }) => {
   return (
     <Breadcrumb tag="nav" listTag="div">
@@ -48,23 +48,24 @@ const RenderFilterForm = () => {
   );
 };
 
-// ----- Presentational Component -----
+// ----- Container Component -----
 function StaffPage(props) {
   const [staffList, setStaffList] = useState(props.staffList);
 
-  function myFunc() {
+  // When change option in form, trigger this function to filter list
+  function filterStaffList() {
     let btnValue = document.getElementById("mySelect").value;
-    let filterList = [];
+    let filteredList = [];
 
     if (btnValue === "default") {
-      filterList = [...props.staffList];
+      filteredList = [...props.staffList];
     } else {
-      filterList = props.staffList.filter(
+      filteredList = props.staffList.filter(
         (staff) => staff.department.name === btnValue
       );
     }
 
-    setStaffList(filterList);
+    setStaffList(filteredList);
   }
 
   const staff = staffList.map((staff) => {
@@ -80,6 +81,7 @@ function StaffPage(props) {
       <div className="container">
         {/* ---------- */}
         {/* Breadcrumb and filter form Section */}
+        {/* ---------- */}
         <div className="row">
           {/* Breadcrumb */}
           <div className="col-12 col-md-8">
@@ -88,7 +90,7 @@ function StaffPage(props) {
           {/* Filter form */}
           <div className="col-12 col-md-4">
             <FormGroup>
-              <Input type="select" id="mySelect" onChange={myFunc}>
+              <Input type="select" id="mySelect" onChange={filterStaffList}>
                 <RenderFilterForm />
               </Input>
             </FormGroup>
@@ -96,6 +98,7 @@ function StaffPage(props) {
         </div>
         {/* ---------- */}
         {/* Staff Render Section */}
+        {/* ---------- */}
         <div className="row">{staff}</div>
       </div>
     </React.Fragment>
