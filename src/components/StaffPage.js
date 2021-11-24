@@ -9,14 +9,14 @@ import {
   FormGroup,
   Input,
 } from "reactstrap";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // ----- Container Component -----
-const RenderBreadcrumb = ({ staffList, match }) => {
+const RenderBreadcrumb = ({ match }) => {
   return (
     <Breadcrumb tag="nav" listTag="div">
       <BreadcrumbItem>
-        <Link to="/staff">Nhân Viên</Link>
+        <Link to={match.path}>Nhân Viên</Link>
       </BreadcrumbItem>
     </Breadcrumb>
   );
@@ -32,6 +32,19 @@ const RenderStaff = ({ match, staff }) => {
         <CardTitle>{staff.name}</CardTitle>
       </CardBody>
     </Card>
+  );
+};
+
+const RenderFilterForm = () => {
+  return (
+    <React.Fragment>
+      <option value="default">Mặc định</option>
+      <option value="Finance">Bộ phận Finance</option>
+      <option value="HR">Bộ phận HR</option>
+      <option value="IT">Bộ phận IT</option>
+      <option value="Marketing">Bộ phận Marketing</option>
+      <option value="Sale">Bộ phận Sale</option>
+    </React.Fragment>
   );
 };
 
@@ -51,10 +64,10 @@ function StaffPage(props) {
       );
     }
 
-    console.log(filterList);
     setStaffList(filterList);
   }
 
+  // Staff Component
   const Staff = () => {
     const staff = staffList.map((staff) => {
       return (
@@ -70,29 +83,22 @@ function StaffPage(props) {
   return (
     <React.Fragment>
       <div className="container">
+        {/* Row of breadcrumb and filter form */}
         <div className="row">
           <div className="col-12 col-md-8">
-            <RenderBreadcrumb staffList={staffList} match={props.match} />
+            <RenderBreadcrumb match={props.match} />
           </div>
+
           <div className="col-12 col-md-4">
             <FormGroup>
-              <Input
-                type="select"
-                name="select"
-                id="mySelect"
-                onChange={myFunc}
-              >
-                <option value="default">Mặc định</option>
-                <option value="Finance">Bộ phận Finance</option>
-                <option value="HR">Bộ phận HR</option>
-                <option value="IT">Bộ phận IT</option>
-                <option value="Marketing">Bộ phận Marketing</option>
-                <option value="Sale">Bộ phận Sale</option>
+              <Input type="select" id="mySelect" onChange={myFunc}>
+                <RenderFilterForm />
               </Input>
             </FormGroup>
           </div>
         </div>
-        <Route path={`${props.match.path}`} component={Staff} />
+        {/* Row of staff render */}
+        <Staff />
       </div>
     </React.Fragment>
   );

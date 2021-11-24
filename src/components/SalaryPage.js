@@ -1,53 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardText, Jumbotron } from "reactstrap";
 import { STAFFS } from "../shared/staffs";
-import { Link, Route, Switch } from "react-router-dom";
 
 const formatDecimal = require("format-decimal");
-const sortedStaffList = [...STAFFS];
 
 // ----- Container Component -----
-function SortBar({ match }) {
-  // Sort salary
-  const sortSalary = (sorttype) => {
-    if (sorttype === "inc") {
-      sortedStaffList.sort(function (a, b) {
-        return a.salary - b.salary;
-      });
-    } else {
-      sortedStaffList.sort(function (a, b) {
-        return b.salary - a.salary;
-      });
-    }
-  };
-
-  return (
-    <div id="sort">
-      <Link to={`${match.path}/sort-inc`} onClick={() => sortSalary("inc")}>
-        <span id="sort-inc">
-          <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sắp xếp tăng
-          dần
-        </span>
-      </Link>
-
-      <Link to={`${match.path}/sort-dec`} onClick={() => sortSalary("dec")}>
-        <span id="sort-dec">
-          <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Sắp xếp giảm
-          dần
-        </span>
-      </Link>
-    </div>
-  );
-}
-
 const RenderSalary = ({ staff }) => {
-  // Caculate salary & add to cloned array
   let salary = Number.parseInt(staff.salaryScale * 3000000, 10);
-  sortedStaffList.forEach((sortedStaff, index) => {
-    if (staff.id === sortedStaff.id) {
-      sortedStaffList[index].salary = salary;
-    }
-  });
 
   return (
     <Jumbotron style={{ textAlign: "left" }}>
@@ -70,42 +29,50 @@ const RenderSalary = ({ staff }) => {
 };
 
 // ----- Presentational Component -----
-function SalaryPage({ staffList, match }) {
-  // Staff Component
-  const Staff = ({ staffList }) => {
-    const staff = staffList.map((staff) => {
-      return (
-        <div className="col-12 col-md-6 col-xl-4">
-          <RenderSalary staff={staff} />
-        </div>
-      );
-    });
+function SalaryPage(props) {
+  const [staffList, setStaffList] = useState(props.staffList);
 
-    return <div className="row">{staff}</div>;
-  };
+  function sortSalary(sorttype) {
+    let sortedStaffList = [...staffList];
+
+    if (sorttype === "inc") {
+      sortedStaffList.sort(function (a, b) {
+        return a.salaryScale - b.salaryScale;
+      });
+    }
+    if (sorttype === "dec") {
+      sortedStaffList.sort(function (a, b) {
+        return b.salaryScale - a.salaryScale;
+      });
+    }
+
+    setStaffList(sortedStaffList);
+  }
+
+  const staff = staffList.map((staff) => {
+    return (
+      <div className="col-12 col-md-6 col-xl-4">
+        <RenderSalary staff={staff} />
+      </div>
+    );
+  });
 
   return (
     <div className="container">
-      {/* Bar for sort function */}
-      <SortBar match={match} />
-      {/* Routing in salary page */}
-      <Switch>
-        <Route
-          path={`${match.path}`}
-          component={() => <Staff staffList={staffList} />}
-          exact
-        />
-        <Route
-          path={`${match.path}/sort-inc`}
-          component={() => <Staff staffList={sortedStaffList} />}
-          exact
-        />
-        <Route
-          path={`${match.path}/sort-dec`}
-          component={() => <Staff staffList={sortedStaffList} />}
-          exact
-        />
-      </Switch>
+      {/* Sort Function Nav */}
+      <div id="sort" className="row">
+        <span onClick={() => sortSalary("inc")}>
+          <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+          Sắp xếp tăng dần
+        </span>
+
+        <span onClick={() => sortSalary("dec")}>
+          <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+          Sắp xếp giảm dần
+        </span>
+      </div>
+      {/* Render staff & salary section */}
+      <div className="row">{staff}</div>
     </div>
   );
 }

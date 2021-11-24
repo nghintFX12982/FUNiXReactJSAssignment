@@ -33,7 +33,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header /> {/* Xem lai code phan nay */}
+        <Header />
         <Switch>
           <Route
             path="/staff"
