@@ -4,9 +4,7 @@ import { Card, CardText, Jumbotron } from "reactstrap";
 const formatDecimal = require("format-decimal");
 
 // ----- Container Component -----
-const RenderSalary = ({ staff }) => {
-  let salary = Number.parseInt(staff.salaryScale * 3000000, 10);
-
+const RenderSalary = ({ staff, salary }) => {
   return (
     <Jumbotron style={{ textAlign: "left" }}>
       <h2 className="py-3">{staff.name}</h2>
@@ -30,18 +28,31 @@ const RenderSalary = ({ staff }) => {
 // ----- Presentational Component -----
 function SalaryPage(props) {
   const [staffList, setStaffList] = useState(props.staffList);
+  // Salary Calculation Feature
+  function salaryCalc(salaryScale, overTime) {
+    const basicSalary = 3000000;
+    const overTimeSalary = 200000;
+    return salaryScale * basicSalary + overTime * overTimeSalary;
+  }
 
   function sortSalary(sorttype) {
     let sortedStaffList = [...staffList];
+    let salaryA = 0;
+    let salaryB = 0;
 
     if (sorttype === "inc") {
       sortedStaffList.sort(function (a, b) {
-        return a.salaryScale - b.salaryScale;
+        salaryA = salaryCalc(a.salaryScale, a.overTime);
+        salaryB = salaryCalc(b.salaryScale, b.overTime);
+        return salaryA - salaryB;
       });
     }
+
     if (sorttype === "dec") {
       sortedStaffList.sort(function (a, b) {
-        return b.salaryScale - a.salaryScale;
+        salaryA = salaryCalc(a.salaryScale, a.overTime);
+        salaryB = salaryCalc(b.salaryScale, b.overTime);
+        return salaryB - salaryA;
       });
     }
 
@@ -51,7 +62,10 @@ function SalaryPage(props) {
   const staff = staffList.map((staff) => {
     return (
       <div className="col-12 col-md-6 col-xl-4">
-        <RenderSalary staff={staff} />
+        <RenderSalary
+          staff={staff}
+          salary={salaryCalc(staff.salaryScale, staff.overTime)}
+        />
       </div>
     );
   });
