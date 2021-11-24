@@ -40,7 +40,15 @@ const RenderDetail = ({ staff }) => {
 function StaffDetailPage({ staff }) {
   return (
     <div className="container">
-      <RenderBreadcrumb staff={staff} />
+      {/* ---------- */}
+      {/* Breadcrumb Section */}
+      <div className="row">
+        <div className="col-12">
+          <RenderBreadcrumb staff={staff} />
+        </div>
+      </div>
+      {/* ---------- */}
+      {/* Image & Info Section */}
       <div className="row">
         <div className="col-12 col-md-4 col-xl-3">
           <RenderImage staff={staff} />

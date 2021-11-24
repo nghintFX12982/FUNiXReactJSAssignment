@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Card, CardText, Jumbotron } from "reactstrap";
-import { STAFFS } from "../shared/staffs";
 
 const formatDecimal = require("format-decimal");
 
@@ -59,7 +58,8 @@ function SalaryPage(props) {
 
   return (
     <div className="container">
-      {/* Sort Function Nav */}
+      {/* ---------- */}
+      {/* Sort Function Section */}
       <div id="sort" className="row">
         <span onClick={() => sortSalary("inc")}>
           <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
@@ -71,7 +71,8 @@ function SalaryPage(props) {
           Sắp xếp giảm dần
         </span>
       </div>
-      {/* Render staff & salary section */}
+      {/* ---------- */}
+      {/* Render staff & salary Section */}
       <div className="row">{staff}</div>
     </div>
   );

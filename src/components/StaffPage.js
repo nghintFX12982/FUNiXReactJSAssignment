@@ -67,28 +67,25 @@ function StaffPage(props) {
     setStaffList(filterList);
   }
 
-  // Staff Component
-  const Staff = () => {
-    const staff = staffList.map((staff) => {
-      return (
-        <div className="col-6 col-md-4 col-xl-2 my-2">
-          <RenderStaff staff={staff} match={props.match} />
-        </div>
-      );
-    });
-
-    return <div className="row">{staff}</div>;
-  };
+  const staff = staffList.map((staff) => {
+    return (
+      <div className="col-6 col-md-4 col-xl-2 my-2">
+        <RenderStaff staff={staff} match={props.match} />
+      </div>
+    );
+  });
 
   return (
     <React.Fragment>
       <div className="container">
-        {/* Row of breadcrumb and filter form */}
+        {/* ---------- */}
+        {/* Breadcrumb and filter form Section */}
         <div className="row">
+          {/* Breadcrumb */}
           <div className="col-12 col-md-8">
             <RenderBreadcrumb match={props.match} />
           </div>
-
+          {/* Filter form */}
           <div className="col-12 col-md-4">
             <FormGroup>
               <Input type="select" id="mySelect" onChange={myFunc}>
@@ -97,8 +94,9 @@ function StaffPage(props) {
             </FormGroup>
           </div>
         </div>
-        {/* Row of staff render */}
-        <Staff />
+        {/* ---------- */}
+        {/* Staff Render Section */}
+        <div className="row">{staff}</div>
       </div>
     </React.Fragment>
   );
