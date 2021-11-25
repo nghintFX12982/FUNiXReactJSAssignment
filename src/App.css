@@ -36,7 +36,7 @@
     transform: rotate(360deg);
   }
 }
-
+/*  */
 /* ---------- Customize ---------- */
 
 .container {
@@ -76,13 +76,11 @@
   border-bottom: 1px solid #ccc;
 }
 
-#sort span {
-  padding-right: 15px;
-}
-
-#sort span:hover {
-  cursor: pointer;
-  color: #037bff;
+#sort button {
+  margin-right: 5px;
+  background-color: #f2f4f6;
+  border: 1px solid #e5e7eb;
+  color: #444;
 }
 
 /* ---------- Footer ---------- */

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardText, Jumbotron } from "reactstrap";
+import { Button, Card, CardText, Jumbotron } from "reactstrap";
 
 const formatDecimal = require("format-decimal");
 
@@ -35,7 +35,7 @@ function SalaryPage(props) {
     return salaryScale * basicSalary + overTime * overTimeSalary;
   }
 
-  // Sort by salary will be triggerd when "sort" word is clicked
+  // Sort by salary will be triggerd when "sort" button is clicked
   function sortSalary(sorttype) {
     let sortedStaffList = [...staffList];
     let salaryA = 0;
@@ -77,15 +77,18 @@ function SalaryPage(props) {
       {/* Sort Function Section */}
       {/* ---------- */}
       <div id="sort" className="row">
-        <span onClick={() => sortSalary("inc")}>
-          <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
-          Sắp xếp tăng dần
-        </span>
+        <div className="col-12">
+          <h5>Sắp xếp theo</h5>
+        </div>
+        <div className="col-12">
+          <Button onClick={() => sortSalary("inc")}>
+            <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Lương thấp
+          </Button>
 
-        <span onClick={() => sortSalary("dec")}>
-          <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
-          Sắp xếp giảm dần
-        </span>
+          <Button onClick={() => sortSalary("dec")}>
+            <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Lương cao
+          </Button>
+        </div>
       </div>
       {/* ---------- */}
       {/* Render staff & salary Section */}

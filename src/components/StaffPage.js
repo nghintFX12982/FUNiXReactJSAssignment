@@ -50,6 +50,7 @@ const RenderFilterForm = () => {
 
 // ----- Container Component -----
 function StaffPage(props) {
+  console.log("Staff");
   const [staffList, setStaffList] = useState(props.staffList);
 
   // When change option in form, trigger this function to filter list

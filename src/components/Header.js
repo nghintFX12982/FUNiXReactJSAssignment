@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import {
   Collapse,
+  Form,
+  FormGroup,
+  Input,
   Navbar,
   NavbarToggler,
   Nav,
@@ -9,9 +12,11 @@ import {
   NavbarText,
 } from "reactstrap";
 import { NavLink as RouterLink } from "react-router-dom";
+import StaffPage from "./StaffPage";
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  let inputName = document.getElementById("input-name");
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -43,10 +48,10 @@ const Header = (props) => {
               </RouterLink>
             </NavItem>
           </Nav>
-          <RouterLink to="/staff">
-            <NavbarText>Thông Tin Nhân Viên</NavbarText>
-          </RouterLink>
         </Collapse>
+        <RouterLink to="/staff">
+          <NavbarText>Thông Tin Nhân Viên</NavbarText>
+        </RouterLink>
       </Navbar>
     </div>
   );
