@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Badge,
   Breadcrumb,
   BreadcrumbItem,
   Button,
@@ -9,6 +10,10 @@ import {
   CardTitle,
   FormGroup,
   Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -16,11 +21,16 @@ import { Link } from "react-router-dom";
 // ----- Presentational Component -----
 const RenderBreadcrumb = ({ match }) => {
   return (
-    <Breadcrumb tag="nav" listTag="div">
-      <BreadcrumbItem>
-        <Link to={match.path}>Nhân Viên</Link>
-      </BreadcrumbItem>
-    </Breadcrumb>
+    <React.Fragment>
+      <Breadcrumb tag="nav" listTag="div">
+        <BreadcrumbItem>
+          <Link to={match.path}>
+            {" "}
+            <h3 style={{ display: "inline-block" }}>Nhân viên</h3>
+          </Link>
+        </BreadcrumbItem>
+      </Breadcrumb>
+    </React.Fragment>
   );
 };
 
@@ -107,28 +117,45 @@ function StaffPage(props) {
         {/* ---------- */}
         {/* Breadcrumb and filter form Section */}
         {/* ---------- */}
-        <div className="row">
+        <div className="row" id="breadcrumb-search-section">
           {/* Breadcrumb */}
-          <div className="col-12 col-md-6">
-            <RenderBreadcrumb match={props.match} />
+          <div className="col-12 col-md-6" id="breadcrumb">
+            <div className="row">
+              <div className="col-8 col-md-6 col-lg-4">
+                <RenderBreadcrumb match={props.match} />
+              </div>
+              <div className="col-4 col-md-6 col-lg-8 left-align">
+                <Button color="danger" id="add-btn">
+                  Add
+                </Button>
+              </div>
+            </div>
           </div>
           {/* Search Box */}
           <div className="col-12 col-md-6" id="staff-search">
-            <Input
-              type="text"
-              id="staff-search-box"
-              placeholder="Nhập tên nhân viên"
-              onBlur={handleBlur}
-            />
-            <Button
-              color="primary"
-              size="md"
-              id="staff-search-btn"
-              onClick={handleClick}
-            >
-              Tìm
-            </Button>
+            <div className="row my-2">
+              <div className="col-8">
+                <Input
+                  type="text"
+                  id="staff-search-box"
+                  placeholder="Nhập tên nhân viên"
+                  onBlur={handleBlur}
+                />
+              </div>
+              <div className="col-4">
+                <Button
+                  color="primary"
+                  size="md"
+                  id="staff-search-btn"
+                  onClick={handleClick}
+                >
+                  Tìm
+                </Button>
+              </div>
+            </div>
           </div>
+        </div>
+        <div className="row">
           {/* Filter form */}
           <div className="col-12 col-md-4">
             <FormGroup>

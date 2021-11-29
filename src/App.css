@@ -63,24 +63,28 @@
 }
 
 /* ---------- Breadcrumb ---------- */
-.breadcrumb {
-  background-color: #fff;
+#breadcrumb-search-section {
   border-bottom: 1px solid #ccc;
   border-radius: 0;
 }
 
-#staff-search {
-  text-align: left;
+#breadcrumb-search-section h3 {
+  margin-bottom: 0;
 }
 
-#staff-search-box {
-  display: inline-block;
-  width: 80%;
+#breadcrumb {
+  padding-top: 7px;
 }
 
+.breadcrumb {
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+#add-btn,
 #staff-search-btn {
-  margin-left: 5px;
-  margin-top: -3px;
+  width: 100%;
 }
 
 #mySelect {
@@ -106,4 +110,20 @@
   text-align: left;
   padding: 20px 50px 20px 50px;
   margin: 32px 0 0 0;
+}
+
+@media only screen and (min-width: 768px) {
+  #add-btn {
+    width: 50%;
+  }
+
+  .left-align {
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #add-btn {
+    width: 30%;
+  }
 }

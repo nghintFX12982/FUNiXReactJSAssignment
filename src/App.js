@@ -12,7 +12,6 @@ import { useSelector, useDispatch } from "react-redux";
 function App() {
   const staffs = useSelector((state) => state.staff.staffs);
   const departments = useSelector((state) => state.staff.departments);
-  const dispatch = useDispatch();
 
   const StaffWithId = ({ match }) => {
     return (
