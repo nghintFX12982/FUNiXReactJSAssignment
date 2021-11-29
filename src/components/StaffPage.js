@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Badge,
   Breadcrumb,
   BreadcrumbItem,
   Button,
@@ -66,6 +65,7 @@ function StaffPage(props) {
   const [staffList, setStaffList] = useState(props.staffList);
   const [searchList, setSearchList] = useState(props.staffList);
   const [currentDepartment, setCurrentDepartment] = useState("default");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // This function will update searchList when search box is blurred
   function handleBlur(e) {
@@ -103,6 +103,10 @@ function StaffPage(props) {
     setStaffList(filteredList);
   }
 
+  function toggleModal() {
+    setIsModalOpen(!isModalOpen);
+  }
+
   const staff = staffList.map((staff) => {
     return (
       <div className="col-6 col-md-4 col-xl-2 my-2">
@@ -125,7 +129,7 @@ function StaffPage(props) {
                 <RenderBreadcrumb match={props.match} />
               </div>
               <div className="col-4 col-md-6 col-lg-8 left-align">
-                <Button color="danger" id="add-btn">
+                <Button color="danger" id="add-btn" onClick={toggleModal}>
                   Add
                 </Button>
               </div>
@@ -155,8 +159,12 @@ function StaffPage(props) {
             </div>
           </div>
         </div>
+        {/* Modal form */}
+        <Modal isOpen={isModalOpen} toggle={toggleModal}>
+          <ModalHeader>Header</ModalHeader>
+        </Modal>
+        {/* Filter form */}
         <div className="row">
-          {/* Filter form */}
           <div className="col-12 col-md-4">
             <FormGroup>
               <Input
