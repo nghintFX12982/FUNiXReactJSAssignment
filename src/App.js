@@ -7,64 +7,53 @@ import StaffPage from "./components/StaffPage";
 import StaffDetailPage from "./components/StaffDetailPage";
 import DepartmentPage from "./components/DepartmentPage";
 import SalaryPage from "./components/SalaryPage";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-const mapStatetoProps = (state) => {
-  return {
-    staffs: state.staffs,
-    departments: state.departments,
-  };
-};
+function App(props) {
+  const staffs = useSelector((state) => state.staff.staffs);
+  const departments = useSelector((state) => state.staff.departments);
+  const dispatch = useDispatch();
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const StaffWithId = ({ match }) => {
-      return (
-        <StaffDetailPage
-          staff={
-            this.props.staffs.filter(
-              (staff) => staff.id === Number.parseInt(match.params.staffId, 10)
-            )[0]
-          }
-        />
-      );
-    };
-
+  const StaffWithId = ({ match }) => {
     return (
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route
-            path="/staff"
-            component={({ match }) => (
-              <StaffPage staffList={this.props.staffs} match={match} />
-            )}
-            exact
-          />
-          <Route path="/staff/:staffId" component={StaffWithId} />
-          <Route
-            path="/department"
-            component={() => (
-              <DepartmentPage departmentList={this.props.departments} />
-            )}
-          />
-          <Route
-            path="/salary"
-            component={({ match }) => (
-              <SalaryPage staffList={this.props.staffs} match={match} />
-            )}
-          />
-
-          <Redirect from="/" to="/staff" />
-        </Switch>
-        <Footer />
-      </div>
+      <StaffDetailPage
+        staff={
+          props.staffs.filter(
+            (staff) => staff.id === Number.parseInt(match.params.staffId, 10)
+          )[0]
+        }
+      />
     );
-  }
+  };
+
+  return (
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route
+          path="/staff"
+          component={({ match }) => (
+            <StaffPage staffList={staffs} match={match} />
+          )}
+          exact
+        />
+        <Route path="/staff/:staffId" component={StaffWithId} />
+        <Route
+          path="/department"
+          component={() => <DepartmentPage departmentList={departments} />}
+        />
+        <Route
+          path="/salary"
+          component={({ match }) => (
+            <SalaryPage staffList={staffs} match={match} />
+          )}
+        />
+
+        <Redirect from="/" to="/staff" />
+      </Switch>
+      <Footer />
+    </div>
+  );
 }
 
-export default withRouter(connect(mapStatetoProps)(App));
+export default App;
