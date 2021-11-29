@@ -1,21 +1,24 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import "./App.css";
-import { STAFFS, DEPARTMENTS } from "./shared/staffs";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import StaffPage from "./components/StaffPage";
 import StaffDetailPage from "./components/StaffDetailPage";
 import DepartmentPage from "./components/DepartmentPage";
 import SalaryPage from "./components/SalaryPage";
+import { connect } from "react-redux";
+
+const mapStatetoProps = (state) => {
+  return {
+    staffs: state.staffs,
+    departments: state.departments,
+  };
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      staffs: STAFFS,
-      departments: DEPARTMENTS,
-    };
   }
 
   render() {
@@ -23,7 +26,7 @@ class App extends Component {
       return (
         <StaffDetailPage
           staff={
-            this.state.staffs.filter(
+            this.props.staffs.filter(
               (staff) => staff.id === Number.parseInt(match.params.staffId, 10)
             )[0]
           }
@@ -38,7 +41,7 @@ class App extends Component {
           <Route
             path="/staff"
             component={({ match }) => (
-              <StaffPage staffList={this.state.staffs} match={match} />
+              <StaffPage staffList={this.props.staffs} match={match} />
             )}
             exact
           />
@@ -46,13 +49,13 @@ class App extends Component {
           <Route
             path="/department"
             component={() => (
-              <DepartmentPage departmentList={this.state.departments} />
+              <DepartmentPage departmentList={this.props.departments} />
             )}
           />
           <Route
             path="/salary"
             component={({ match }) => (
-              <SalaryPage staffList={this.state.staffs} match={match} />
+              <SalaryPage staffList={this.props.staffs} match={match} />
             )}
           />
 
@@ -64,4 +67,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(connect(mapStatetoProps)(App));
