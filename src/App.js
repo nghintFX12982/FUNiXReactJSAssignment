@@ -9,7 +9,7 @@ import DepartmentPage from "./components/DepartmentPage";
 import SalaryPage from "./components/SalaryPage";
 import { useSelector, useDispatch } from "react-redux";
 
-function App(props) {
+function App() {
   const staffs = useSelector((state) => state.staff.staffs);
   const departments = useSelector((state) => state.staff.departments);
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function App(props) {
     return (
       <StaffDetailPage
         staff={
-          props.staffs.filter(
+          staffs.filter(
             (staff) => staff.id === Number.parseInt(match.params.staffId, 10)
           )[0]
         }
