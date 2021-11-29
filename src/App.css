@@ -69,6 +69,24 @@
   border-radius: 0;
 }
 
+#staff-search {
+  text-align: left;
+}
+
+#staff-search-box {
+  display: inline-block;
+  width: 80%;
+}
+
+#staff-search-btn {
+  margin-left: 5px;
+  margin-top: -3px;
+}
+
+#mySelect {
+  margin-top: 10px;
+}
+
 #sort {
   text-align: left;
   padding: 8px;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
+  Button,
   Card,
   CardImg,
   CardBody,
@@ -11,6 +12,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
+// ------------------------------------
 // ----- Presentational Component -----
 const RenderBreadcrumb = ({ match }) => {
   return (
@@ -38,7 +40,7 @@ const RenderStaff = ({ match, staff }) => {
 const RenderFilterForm = () => {
   return (
     <React.Fragment>
-      <option value="default">Mặc định</option>
+      <option value="default">(Bộ phận)</option>
       <option value="Finance">Bộ phận Finance</option>
       <option value="HR">Bộ phận HR</option>
       <option value="IT">Bộ phận IT</option>
@@ -48,24 +50,46 @@ const RenderFilterForm = () => {
   );
 };
 
+// -------------------------------
 // ----- Container Component -----
 function StaffPage(props) {
-  console.log("Staff");
   const [staffList, setStaffList] = useState(props.staffList);
+  const [searchList, setSearchList] = useState(props.staffList);
+  const [currentDepartment, setCurrentDepartment] = useState("default");
 
-  // When change option in form, trigger this function to filter list
-  function filterStaffList() {
-    let btnValue = document.getElementById("mySelect").value;
-    let filteredList = [];
+  // This function will update searchList when search box is blurred
+  function handleBlur(e) {
+    const searchValue = e.target.value;
+    setSearchList(props.staffList);
 
-    if (btnValue === "default") {
-      filteredList = [...props.staffList];
-    } else {
+    if (searchValue !== "") {
+      setSearchList(
+        props.staffList.filter(
+          (staff) =>
+            staff.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
+        )
+      );
+    }
+  }
+
+  // This function will set staffList as searchList & re-render when click "find" button
+  function handleClick(e) {
+    setCurrentDepartment("default");
+    setStaffList(searchList);
+  }
+
+  // This function will update filtered list & re-render when options are changed
+  function filterStaffList(e) {
+    let filteredValue = e.target.value;
+    let filteredList = [...props.staffList];
+
+    if (filteredValue !== "default") {
       filteredList = props.staffList.filter(
-        (staff) => staff.department.name === btnValue
+        (staff) => staff.department.name === filteredValue
       );
     }
 
+    setCurrentDepartment(filteredValue);
     setStaffList(filteredList);
   }
 
@@ -85,13 +109,35 @@ function StaffPage(props) {
         {/* ---------- */}
         <div className="row">
           {/* Breadcrumb */}
-          <div className="col-12 col-md-8">
+          <div className="col-12 col-md-6">
             <RenderBreadcrumb match={props.match} />
+          </div>
+          {/* Search Box */}
+          <div className="col-12 col-md-6" id="staff-search">
+            <Input
+              type="text"
+              id="staff-search-box"
+              placeholder="Nhập tên nhân viên"
+              onBlur={handleBlur}
+            />
+            <Button
+              color="primary"
+              size="md"
+              id="staff-search-btn"
+              onClick={handleClick}
+            >
+              Tìm
+            </Button>
           </div>
           {/* Filter form */}
           <div className="col-12 col-md-4">
             <FormGroup>
-              <Input type="select" id="mySelect" onChange={filterStaffList}>
+              <Input
+                type="select"
+                id="mySelect"
+                value={currentDepartment}
+                onChange={filterStaffList}
+              >
                 <RenderFilterForm />
               </Input>
             </FormGroup>
