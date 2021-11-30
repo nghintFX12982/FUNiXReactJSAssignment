@@ -122,12 +122,13 @@ function StaffPage(props) {
         {/* Breadcrumb and filter form Section */}
         {/* ---------- */}
         <div className="row" id="breadcrumb-search-section">
-          {/* Breadcrumb */}
           <div className="col-12 col-md-6" id="breadcrumb">
             <div className="row">
+              {/* Breadcrumb */}
               <div className="col-8 col-md-6 col-lg-4">
                 <RenderBreadcrumb match={props.match} />
               </div>
+              {/* Add button */}
               <div className="col-4 col-md-6 col-lg-8 left-align">
                 <Button color="danger" id="add-btn" onClick={toggleModal}>
                   Add
@@ -162,6 +163,8 @@ function StaffPage(props) {
         {/* Modal form */}
         <Modal isOpen={isModalOpen} toggle={toggleModal}>
           <ModalHeader>Header</ModalHeader>
+          <ModalBody>Body</ModalBody>
+          <ModalFooter>Footer</ModalFooter>
         </Modal>
         {/* Filter form */}
         <div className="row">
