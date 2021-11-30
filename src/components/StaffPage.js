@@ -13,8 +13,20 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Label,
+  Row,
+  Col,
 } from "reactstrap";
+import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
+
+// const required = (val) => val.length;
+const required = (val) => val;
+const minLength = (val, len) => val && val.length >= len;
+const maxLength = (val, len) => !val || val.length <= len;
+const isNumber = (val) => !isNaN(Number(val));
+const validEmail = (val) =>
+  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 // ------------------------------------
 // ----- Presentational Component -----
@@ -163,7 +175,37 @@ function StaffPage(props) {
         {/* Modal form */}
         <Modal isOpen={isModalOpen} toggle={toggleModal}>
           <ModalHeader>Header</ModalHeader>
-          <ModalBody>Body</ModalBody>
+          <ModalBody>
+            <LocalForm>
+              <Row className="form-group">
+                <Label htmlFor="fullname" md={2}>
+                  Họ tên
+                </Label>
+                <Col md={10}>
+                  <Control
+                    model=".fullname"
+                    id="fullname"
+                    name="fullname"
+                    className="form-control"
+                    validators={{
+                      required,
+                      minLength: (val) => minLength(val, 4),
+                      maxLength: (val) => maxLength(val, 15),
+                    }}
+                  />
+                  <Errors
+                    model=".fullname"
+                    className="text-danger"
+                    messages={{
+                      required: "Required ",
+                      minLength: "Must be greater than 3 characters",
+                      maxLength: "Must be 15 characters or less",
+                    }}
+                  />
+                </Col>
+              </Row>
+            </LocalForm>
+          </ModalBody>
           <ModalFooter>Footer</ModalFooter>
         </Modal>
         {/* Filter form */}
