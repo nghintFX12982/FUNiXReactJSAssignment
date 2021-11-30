@@ -20,10 +20,6 @@ import {
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 
-// const required = (val) => val.length;
-const required = (val) => val;
-const minLength = (val, len) => val && val.length >= len;
-const maxLength = (val, len) => !val || val.length <= len;
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
@@ -174,32 +170,178 @@ function StaffPage(props) {
         </div>
         {/* Modal form */}
         <Modal isOpen={isModalOpen} toggle={toggleModal}>
-          <ModalHeader>Header</ModalHeader>
+          <ModalHeader>Thêm nhân viên</ModalHeader>
           <ModalBody>
             <LocalForm>
+              {/* Full name */}
               <Row className="form-group">
-                <Label htmlFor="fullname" md={2}>
+                <Label htmlFor="name" md={5}>
                   Họ tên
                 </Label>
-                <Col md={10}>
+                <Col md={7}>
                   <Control
-                    model=".fullname"
-                    id="fullname"
-                    name="fullname"
+                    model=".name"
+                    id="name"
+                    name="name"
                     className="form-control"
                     validators={{
-                      required,
-                      minLength: (val) => minLength(val, 4),
-                      maxLength: (val) => maxLength(val, 15),
+                      lenRange: (val) => val && val.length >= 3 && val <= 15,
                     }}
                   />
                   <Errors
-                    model=".fullname"
+                    model=".name"
                     className="text-danger"
                     messages={{
-                      required: "Required ",
-                      minLength: "Must be greater than 3 characters",
-                      maxLength: "Must be 15 characters or less",
+                      lenRange: "Yêu cầu số ký tự trong khoảng 3-15",
+                    }}
+                  />
+                </Col>
+              </Row>
+              {/* Date of birth*/}
+              <Row className="form-group">
+                <Label htmlFor="doB" md={5}>
+                  Ngày sinh
+                </Label>
+                <Col md={7}>
+                  <Control.input
+                    type="date"
+                    model=".doB"
+                    id="doB"
+                    name="doB"
+                    className="form-control"
+                    validators={{
+                      required: (val) => val,
+                    }}
+                  />
+                  <Errors
+                    model=".doB"
+                    className="text-danger"
+                    messages={{
+                      required: "Yêu cầu bắt buộc ",
+                    }}
+                  />
+                </Col>
+              </Row>
+              {/* Started Date*/}
+              <Row className="form-group">
+                <Label htmlFor="startDate" md={5}>
+                  Ngày vào công ty
+                </Label>
+                <Col md={7}>
+                  <Control.input
+                    type="date"
+                    model=".startDate"
+                    id="startDate"
+                    name="startDate"
+                    className="form-control"
+                    validators={{
+                      required: (val) => val,
+                    }}
+                  />
+                  <Errors
+                    model=".startDate"
+                    className="text-danger"
+                    messages={{
+                      required: "Yêu cầu bắt buộc ",
+                    }}
+                  />
+                </Col>
+              </Row>
+              {/* Department */}
+              <Row className="form-group">
+                <Label htmlFor="department" md={5}>
+                  Phòng ban
+                </Label>
+                <Col md={7}>
+                  <Control.select
+                    model=".department"
+                    id="department"
+                    name="department"
+                    className="form-control"
+                  >
+                    <option>Finance</option>
+                    <option>HR</option>
+                    <option>IT</option>
+                    <option>Marketing</option>
+                    <option>Sale</option>
+                  </Control.select>
+                  <Errors model=".department" />
+                </Col>
+              </Row>
+              {/* Salary Scale */}
+              <Row className="form-group">
+                <Label htmlFor="salaryScale" md={5}>
+                  Hệ số lương
+                </Label>
+                <Col md={7}>
+                  <Control
+                    model=".salaryScale"
+                    id="salaryScale"
+                    name="salaryScale"
+                    placeHolder="1-3"
+                    className="form-control"
+                    defaultValue="1"
+                    validators={{
+                      typeCheck: (val) => Number.parseInt(val),
+                      numRange: (val) => val > 0 && val < 4,
+                    }}
+                  />
+                  <Errors
+                    model=".salaryScale"
+                    className="text-danger"
+                    messages={{
+                      typeChecl: "Yêu cầu nhập số",
+                      numRange: "Yêu cầu nhập số trong khoảng 1-3",
+                    }}
+                  />
+                </Col>
+              </Row>
+              {/* Annual Leave */}
+              <Row className="form-group">
+                <Label htmlFor="annualLeave" md={5}>
+                  Số ngày nghỉ còn lại
+                </Label>
+                <Col md={7}>
+                  <Control
+                    model=".annualLeave"
+                    id="annualLeave"
+                    name="annualLeave"
+                    className="form-control"
+                    defaultValue="0"
+                    validators={{
+                      typeCheck: (val) => !Number.isNaN(Number(val)),
+                    }}
+                  />
+                  <Errors
+                    model=".annualLeave"
+                    className="text-danger"
+                    messages={{
+                      typeCheck: "Yêu cầu nhập số ",
+                    }}
+                  />
+                </Col>
+              </Row>
+              {/* Overtime */}
+              <Row className="form-group">
+                <Label htmlFor="overTime" md={5}>
+                  Số ngày đã làm thêm
+                </Label>
+                <Col md={7}>
+                  <Control
+                    model=".overTime"
+                    id="overTime"
+                    name="overTime"
+                    className="form-control"
+                    defaultValue="0"
+                    validators={{
+                      typeCheck: (val) => !Number.isNaN(Number(val)),
+                    }}
+                  />
+                  <Errors
+                    model=".overTime"
+                    className="text-danger"
+                    messages={{
+                      typeCheck: "Yêu cầu nhập số",
                     }}
                   />
                 </Col>
