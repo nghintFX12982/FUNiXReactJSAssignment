@@ -185,14 +185,15 @@ function StaffPage(props) {
                     name="name"
                     className="form-control"
                     validators={{
-                      lenRange: (val) => val && val.length >= 3 && val <= 15,
+                      lenRange: (val) =>
+                        val && val.length >= 3 && val.length <= 15,
                     }}
                   />
                   <Errors
                     model=".name"
                     className="text-danger"
                     messages={{
-                      lenRange: "Yêu cầu số ký tự trong khoảng 3-15",
+                      lenRange: "Yêu cầu nhập từ 3-15 ký tự",
                     }}
                   />
                 </Col>
@@ -290,8 +291,8 @@ function StaffPage(props) {
                     model=".salaryScale"
                     className="text-danger"
                     messages={{
-                      typeChecl: "Yêu cầu nhập số",
-                      numRange: "Yêu cầu nhập số trong khoảng 1-3",
+                      typeCheck: "Yêu cầu nhập số",
+                      numRange: "Yêu cầu nhập số từ 1-3",
                     }}
                   />
                 </Col>
@@ -346,9 +347,16 @@ function StaffPage(props) {
                   />
                 </Col>
               </Row>
+              {/* Submit button */}
+              <Row className="form-group">
+                <Col className="col-7 offset-5">
+                  <Button type="submit" color="primary">
+                    Thêm
+                  </Button>
+                </Col>
+              </Row>
             </LocalForm>
           </ModalBody>
-          <ModalFooter>Footer</ModalFooter>
         </Modal>
         {/* Filter form */}
         <div className="row">
