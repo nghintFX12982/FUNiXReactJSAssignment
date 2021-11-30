@@ -10,7 +10,7 @@ export const staffSlice = createSlice({
   },
   reducers: {
     add: (state, action) => {
-      return state.staffs.push(action.payload);
+      state.staffs.push(action.payload);
       // return state;
     },
   },

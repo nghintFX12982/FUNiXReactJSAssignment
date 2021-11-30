@@ -76,6 +76,7 @@ function StaffPage(props) {
   const [searchList, setSearchList] = useState(props.staffList);
   const [currentDepartment, setCurrentDepartment] = useState("default");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   // This function will update searchList when search box is blurred
   function handleBlur(e) {
@@ -100,9 +101,11 @@ function StaffPage(props) {
 
   // This function will get value from modal form when click submit button
   function handleSubmit(value) {
-    const action = add(value);
-    const dispatch = useDispatch();
-    console.log(action);
+    const newStaff = { ...value };
+    newStaff.id = staffList.length;
+    newStaff.image = "/assets/images/alberto.png";
+
+    const action = add(newStaff);
     dispatch(action);
   }
 
