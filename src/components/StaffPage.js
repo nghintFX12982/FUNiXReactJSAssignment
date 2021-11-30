@@ -17,12 +17,14 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { add } from "../redux/staffSlice";
+import { useDispatch } from "react-redux";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 
-const isNumber = (val) => !isNaN(Number(val));
-const validEmail = (val) =>
-  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+// const isNumber = (val) => !isNaN(Number(val));
+// const validEmail = (val) =>
+//   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 // ------------------------------------
 // ----- Presentational Component -----
@@ -94,6 +96,14 @@ function StaffPage(props) {
   function handleClick(e) {
     setCurrentDepartment("default");
     setStaffList(searchList);
+  }
+
+  // This function will get value from modal form when click submit button
+  function handleSubmit(value) {
+    const action = add(value);
+    const dispatch = useDispatch();
+    console.log(action);
+    dispatch(action);
   }
 
   // This function will update filtered list & re-render when options are changed
@@ -172,7 +182,7 @@ function StaffPage(props) {
         <Modal isOpen={isModalOpen} toggle={toggleModal}>
           <ModalHeader>Thêm nhân viên</ModalHeader>
           <ModalBody>
-            <LocalForm>
+            <LocalForm onSubmit={handleSubmit}>
               {/* Full name */}
               <Row className="form-group">
                 <Label htmlFor="name" md={5}>

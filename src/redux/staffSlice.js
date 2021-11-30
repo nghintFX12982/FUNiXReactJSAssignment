@@ -9,8 +9,9 @@ export const staffSlice = createSlice({
     departments: DEPARTMENTS,
   },
   reducers: {
-    add: (state) => {
-      return state;
+    add: (state, action) => {
+      return state.staffs.push(action.payload);
+      // return state;
     },
   },
 });
