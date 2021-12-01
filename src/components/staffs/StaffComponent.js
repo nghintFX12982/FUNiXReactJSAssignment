@@ -84,10 +84,12 @@ function StaffPage(props) {
     setStaffList(filteredList);
   }
 
+  // This function will set true/false for isModalOpen flag
   function toggleModal() {
     setIsModalOpen(!isModalOpen);
   }
 
+  // staff will be rendered to RenderStaff Component
   const staff = staffList.map((staff) => {
     return (
       <div className="col-6 col-md-4 col-xl-2 my-2">

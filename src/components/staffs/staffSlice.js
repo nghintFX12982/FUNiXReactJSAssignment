@@ -5,7 +5,7 @@ const staffSlice = createSlice({
   name: "staff",
   initialState: STAFFS,
   reducers: {
-    add: (state, action) => {
+    addStaff: (state, action) => {
       //state will get from initialState
       state.push(action.payload);
     },
@@ -13,5 +13,5 @@ const staffSlice = createSlice({
 });
 
 const { actions, reducer } = staffSlice;
-export const { add } = actions;
+export const { addStaff } = actions;
 export default reducer;

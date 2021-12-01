@@ -1,4 +1,5 @@
-import { add } from "./staffSlice";
+import { addStaff } from "./staffSlice";
+import { addDepartment } from "../departments/departmentSlice";
 
 import React, { useState } from "react";
 import {
@@ -10,22 +11,31 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
 function AddStaffModal(props) {
   const [staffList, setStaffList] = useState(props.staffList);
 
+  const departmentList = useSelector((state) => state.department);
   const dispatch = useDispatch();
 
   // This function will get value from modal form when click submit button
   function handleSubmit(value) {
     const newStaff = { ...value };
+
     newStaff.id = staffList.length;
     newStaff.image = "/assets/images/alberto.png";
 
-    const action = add(newStaff);
-    dispatch(action);
+    departmentList.forEach((department, index) => {
+      if (department.name === newStaff.department) {
+        newStaff.department = departmentList[index];
+      }
+    });
+
+    // console.log(addDepartment(newStaff).payload);
+    dispatch(addStaff(newStaff));
+    dispatch(addDepartment(newStaff));
   }
 
   return (
@@ -118,12 +128,13 @@ function AddStaffModal(props) {
                 id="department"
                 name="department"
                 className="form-control"
+                defaultValue="Finance"
               >
-                <option>Finance</option>
-                <option>HR</option>
-                <option>IT</option>
-                <option>Marketing</option>
-                <option>Sale</option>
+                <option value="Finance">Finance</option>
+                <option value="HR">HR</option>
+                <option value="IT">IT</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Sale">Sale</option>
               </Control.select>
               <Errors model=".department" />
             </Col>
