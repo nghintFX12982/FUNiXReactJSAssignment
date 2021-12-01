@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import {
   Collapse,
-  Form,
-  FormGroup,
-  Input,
   Navbar,
   NavbarToggler,
   Nav,
@@ -12,7 +9,6 @@ import {
   NavbarText,
 } from "reactstrap";
 import { NavLink as RouterLink } from "react-router-dom";
-import StaffPage from "./StaffPage";
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
