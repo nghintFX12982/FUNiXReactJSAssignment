@@ -115,6 +115,7 @@ function StaffPage(props) {
           isModalOpen={isModalOpen}
           toggleModal={toggleModal}
           setStaffList={props.setStaffs}
+          setDepartments={props.setDepartments}
         />
         {/* Filter form */}
         <div className="row">

@@ -25,6 +25,10 @@ function AddStaffModal(props) {
 
       // Default value of department when add new staff is "Finance"
       newStaff.department = newStaff.department || "Finance";
+      newStaff.salaryScale = newStaff.salaryScale || 1;
+      newStaff.annualLeave = newStaff.annualLeave || 0;
+      newStaff.overTime = newStaff.overTime || 0;
+
       newStaff.id = staffList.length;
       newStaff.image = "/assets/images/alberto.png";
       props.departmentList.forEach((department) => {
@@ -37,12 +41,49 @@ function AddStaffModal(props) {
 
   // This function will get value from modal form when click submit button
   function handleSubmit(e) {
+    e.preventDefault();
     props.toggleModal();
+    // Cannot use directly or clone DEPARTMENT due to READ-ONLY property
+    let departmentList = [
+      {
+        id: "Dept01",
+        name: "Sale",
+        numberOfStaff: 1,
+      },
+      {
+        id: "Dept02",
+        name: "HR",
+        numberOfStaff: 1,
+      },
+      {
+        id: "Dept03",
+        name: "Marketing",
+        numberOfStaff: 2,
+      },
+      {
+        id: "Dept04",
+        name: "IT",
+        numberOfStaff: 1,
+      },
+      {
+        id: "Dept05",
+        name: "Finance",
+        numberOfStaff: 11,
+      },
+    ];
+
+    departmentList.forEach((department, index) => {
+      if (department.name === newStaff.department.name) {
+        department.numberOfStaff += 1;
+      }
+    });
+    console.log(departmentList);
+
     staffList.push(newStaff);
     newStaff = {};
-    props.setStaffList(staffList);
 
-    e.preventDefault();
+    props.setStaffList(staffList);
+    props.setDepartments(departmentList);
   }
 
   const closeBtn = (

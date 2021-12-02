@@ -12,7 +12,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
   const [staffs, setStaffs] = useState(STAFFS);
-  const departments = [...DEPARTMENTS];
+  const [departments, setDepartments] = useState(DEPARTMENTS);
 
   const StaffWithId = ({ match }) => {
     return (
@@ -38,6 +38,7 @@ function App() {
               staffList={staffs}
               setStaffs={setStaffs}
               departmentList={departments}
+              setDepartments={setDepartments}
               match={match}
             />
           )}
