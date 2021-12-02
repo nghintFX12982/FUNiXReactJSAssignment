@@ -44,9 +44,17 @@ function AddStaffModal(props) {
     dispatch(addDepartment(newStaff));
   }
 
+  const closeBtn = (
+    <button className="close" onClick={props.toggleModal}>
+      &times;
+    </button>
+  );
+
   return (
     <Modal isOpen={props.isModalOpen} toggle={props.toggleModal}>
-      <ModalHeader>Thêm nhân viên</ModalHeader>
+      <ModalHeader toggle={props.toggleModal} close={closeBtn}>
+        Thêm nhân viên
+      </ModalHeader>
       <ModalBody>
         <LocalForm onSubmit={handleSubmit}>
           {/* Full name */}

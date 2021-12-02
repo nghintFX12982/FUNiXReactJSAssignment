@@ -1,3 +1,4 @@
+// Can use any name for export default
 import staffReducer from "../components/staffs/staffSlice";
 import departmentReducer from "../components/departments/departmentSlice";
 import { configureStore } from "@reduxjs/toolkit";
