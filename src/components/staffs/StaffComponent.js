@@ -61,8 +61,8 @@ function StaffPage(props) {
       );
 
       setSearchValue("");
-      props.setStaffs(searchList);
       setCurrentDepartment("default");
+      props.setStaffs(searchList);
     } else {
       props.setStaffs(props.staffList);
     }
@@ -111,6 +111,7 @@ function StaffPage(props) {
         {/* ----- Modal form (Controlled Form) ----- */}
         <AddStaffModal
           staffList={props.staffList}
+          departmentList={props.departmentList}
           isModalOpen={isModalOpen}
           toggleModal={toggleModal}
           setStaffList={props.setStaffs}

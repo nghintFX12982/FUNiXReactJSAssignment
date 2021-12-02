@@ -36,9 +36,9 @@ function App() {
           component={({ match }) => (
             <StaffPage
               staffList={staffs}
+              setStaffs={setStaffs}
               departmentList={departments}
               match={match}
-              setStaffs={setStaffs}
             />
           )}
           exact

@@ -1,7 +1,4 @@
-import { addStaff } from "./staffSlice";
-import { addDepartment } from "../departments/departmentSlice";
-
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Modal,
@@ -15,6 +12,7 @@ import {
   Col,
 } from "reactstrap";
 
+// ----- Controlled Form -----
 function AddStaffModal(props) {
   const staffList = [...props.staffList];
   let newStaff = {};
@@ -24,8 +22,16 @@ function AddStaffModal(props) {
       let staffKey = e.target.name;
       let value = e.target.value;
       newStaff[staffKey] = value;
+
+      // Default value of department when add new staff is "Finance"
+      newStaff.department = newStaff.department || "Finance";
       newStaff.id = staffList.length;
       newStaff.image = "/assets/images/alberto.png";
+      props.departmentList.forEach((department) => {
+        if (newStaff.department === department.name) {
+          newStaff.department = department;
+        }
+      });
     }
   }
 
@@ -37,20 +43,6 @@ function AddStaffModal(props) {
     props.setStaffList(staffList);
 
     e.preventDefault();
-
-    // departmentList.forEach((department, index) => {
-    //   if (department.name === newStaff.department) {
-    //     newStaff.department = department;
-    //   }
-    // });
-
-    // let localStaff = localStorage.getItem("newStaff")
-    //   ? JSON.parse(localStorage.getItem("newStaff"))
-    //   : [];
-
-    // localStaff.push(newStaff);
-    // props.staffList.push(localStaff);
-    // localStorage.setItem("newStaff", JSON.stringify(localStaff));
   }
 
   const closeBtn = (
@@ -129,7 +121,6 @@ function AddStaffModal(props) {
                   id="department"
                   name="department"
                   className="form-control"
-                  defaultValue="Finance"
                   onChange={handleInputChange}
                 >
                   <option value="Finance">Finance</option>
