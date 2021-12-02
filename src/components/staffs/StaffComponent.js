@@ -82,10 +82,8 @@ function StaffPage(props) {
       );
     }
 
-    console.log(filteredValue);
     setCurrentDepartment(filteredValue);
-
-    props.setStaffs(filteredList);
+    setStaffList(filteredList);
   }
 
   // This function will set true/false for isModalOpen flag
