@@ -17,6 +17,7 @@ import {
 function AddStaffModal(props) {
   const staffList = [...props.staffList];
   const [newStaff, setNewStaff] = useState({});
+  const [isDisabled, setIsDisabled] = useState(true);
 
   let [nameError, setNameError] = useState("Yêu cầu bắt buộc");
   let [doBError, setDoBError] = useState("Yêu cầu bắt buộc");
@@ -57,9 +58,12 @@ function AddStaffModal(props) {
 
   // Function to check valid data
   function checkValid() {
+    let isInvalid = false;
+
     // Check name valid
     if (!newStaff.name || newStaff.name.length < 4) {
       setNameError("Yêu cầu nhập nhiều hơn 3 ký tự");
+      isInvalid = true;
     } else {
       setNameError("");
     }
@@ -67,6 +71,7 @@ function AddStaffModal(props) {
     // Check date of birth valid
     if (!newStaff.doB) {
       setDoBError("Yêu cầu bắt buộc");
+      isInvalid = true;
     } else {
       setDoBError("");
     }
@@ -74,6 +79,7 @@ function AddStaffModal(props) {
     // Check start date valid
     if (!newStaff.startDate) {
       setStartDateError("Yêu cầu bắt buộc");
+      isInvalid = true;
     } else {
       setStartDateError("");
     }
@@ -86,25 +92,31 @@ function AddStaffModal(props) {
       setSalaryScaleError("");
     } else {
       setSalaryScaleError("Yêu cầu nhập số từ 1-3");
+      isInvalid = true;
     }
 
     if (Number(newStaff.annualLeave) || newStaff.annualLeave === "0") {
       setAnnualLeaveError("");
     } else {
       setAnnualLeaveError("Yêu cầu nhập số");
+      isInvalid = true;
     }
 
     if (Number(newStaff.overTime) || newStaff.overTime === "0") {
       setOverTimeError("");
     } else {
       setOverTimeError("Yêu cầu nhập số");
+      isInvalid = true;
     }
+
+    setIsDisabled(isInvalid);
   }
 
   // This function will get value from modal form when click submit button
   function handleSubmit(e) {
     e.preventDefault();
-    props.toggleModal();
+
+    // props.toggleModal();
     // Cannot use directly or clone DEPARTMENT due to READ-ONLY property
     let departmentList = [
       {
@@ -326,7 +338,7 @@ function AddStaffModal(props) {
           <FormGroup>
             <Row className="form-group">
               <Col className="col-7 offset-5">
-                <Button type="submit" color="primary">
+                <Button type="submit" color="primary" disabled={isDisabled}>
                   Thêm
                 </Button>
               </Col>

@@ -48,7 +48,6 @@ function StaffPage(props) {
   const [searchValue, setSearchValue] = useState("");
   const [currentDepartment, setCurrentDepartment] = useState("default");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(currentDepartment);
 
   // This function will update searchList when search box is blurred
   function handleBlur(e) {
@@ -63,7 +62,7 @@ function StaffPage(props) {
           staff.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
       );
 
-      setSearchValue("");
+      // setSearchValue("");
       setCurrentDepartment("default");
       setStaffList(searchList);
     } else {
