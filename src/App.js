@@ -1,4 +1,5 @@
 import "./App.css";
+import { STAFFS, DEPARTMENTS } from "./shared/staffs";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import StaffPage from "./components/staffs/StaffComponent";
@@ -8,11 +9,10 @@ import SalaryPage from "./components/SalaryPage";
 
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 function App() {
-  const staffs = useSelector((state) => state.staff);
-  const departments = useSelector((state) => state.department);
+  const staffs = [...STAFFS];
+  const departments = [...DEPARTMENTS];
 
   const StaffWithId = ({ match }) => {
     return (

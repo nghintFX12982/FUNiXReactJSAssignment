@@ -30,6 +30,7 @@ function BreadcrumbStaff(props) {
             <RenderBreadcrumb match={props.match} />
           </div>
           {/* Add button */}
+          {/* Click this button to show modal */}
           <div className="col-4 col-md-6 col-lg-8 left-align">
             <Button color="danger" id="add-btn" onClick={props.toggleModal}>
               Add
@@ -37,7 +38,7 @@ function BreadcrumbStaff(props) {
           </div>
         </div>
       </div>
-      {/* ----- Search Box Section ----- */}
+      {/* ----- Search Box Section (Uncontrolled Form) ----- */}
       <div className="col-12 col-md-6" id="staff-search">
         <div className="row my-2">
           <div className="col-8">

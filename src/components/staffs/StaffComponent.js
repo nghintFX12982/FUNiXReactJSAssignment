@@ -44,29 +44,30 @@ const RenderFilterForm = () => {
 // ----- Container Component -----
 function StaffPage(props) {
   const [staffList, setStaffList] = useState(props.staffList);
-  const [searchList, setSearchList] = useState(props.staffList);
+  const [searchValue, setSearchValue] = useState("");
+  // const [searchList, setSearchList] = useState(props.staffList);
   const [currentDepartment, setCurrentDepartment] = useState("default");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // This function will update searchList when search box is blurred
   function handleBlur(e) {
-    const searchValue = e.target.value;
-    setSearchList(props.staffList);
-
-    if (searchValue !== "") {
-      setSearchList(
-        props.staffList.filter(
-          (staff) =>
-            staff.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
-        )
-      );
-    }
+    setSearchValue(e.target.value);
   }
 
   // This function will set staffList as searchList & re-render when click "find" button
-  function handleClick(e) {
-    setCurrentDepartment("default");
-    setStaffList(searchList);
+  function handleClick() {
+    if (searchValue !== "") {
+      const searchList = props.staffList.filter(
+        (staff) =>
+          staff.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
+      );
+
+      setSearchValue("");
+      setStaffList(searchList);
+      setCurrentDepartment("default");
+    } else {
+      setStaffList(props.staffList);
+    }
   }
 
   // This function will update filtered list & re-render when options are changed
@@ -101,14 +102,15 @@ function StaffPage(props) {
   return (
     <React.Fragment>
       <div className="container">
-        {/* ----- Breadcrumb and Search Section ------ */}
+        {/* ----- Breadcrumb and Search Section (Uncontrolled Form) ------ */}
+        {/* toggleModal props will set value true-false for isModalOopen props*/}
         <BreadcrumbStaff
           match={props.match}
           toggleModal={toggleModal}
           handleBlur={handleBlur}
           handleClick={handleClick}
         />
-        {/* ----- Modal form ----- */}
+        {/* ----- Modal form (Controlled Form) ----- */}
         <AddStaffModal
           staffList={staffList}
           isModalOpen={isModalOpen}
