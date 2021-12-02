@@ -7,6 +7,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  FormGroup,
+  Input,
   Label,
   Row,
   Col,
@@ -56,29 +58,15 @@ function AddStaffModal(props) {
         Thêm nhân viên
       </ModalHeader>
       <ModalBody>
-        <LocalForm onSubmit={handleSubmit}>
+        {/* ----- Uncontrolled Form ----- */}
+        <FormGroup onSubmit={handleSubmit}>
           {/* Full name */}
           <Row className="form-group">
             <Label htmlFor="name" md={5}>
               Họ tên
             </Label>
             <Col md={7}>
-              <Control
-                model=".name"
-                id="name"
-                name="name"
-                className="form-control"
-                validators={{
-                  lenRange: (val) => val && val.length >= 3 && val.length <= 15,
-                }}
-              />
-              <Errors
-                model=".name"
-                className="text-danger"
-                messages={{
-                  lenRange: "Yêu cầu nhập từ 3-15 ký tự",
-                }}
-              />
+              <Input id="name" name="name" className="form-control" />
             </Col>
           </Row>
           {/* Date of birth*/}
@@ -87,23 +75,7 @@ function AddStaffModal(props) {
               Ngày sinh
             </Label>
             <Col md={7}>
-              <Control.input
-                type="date"
-                model=".doB"
-                id="doB"
-                name="doB"
-                className="form-control"
-                validators={{
-                  required: (val) => val,
-                }}
-              />
-              <Errors
-                model=".doB"
-                className="text-danger"
-                messages={{
-                  required: "Yêu cầu bắt buộc ",
-                }}
-              />
+              <Input type="date" id="doB" name="doB" className="form-control" />
             </Col>
           </Row>
           {/* Started Date*/}
@@ -112,22 +84,11 @@ function AddStaffModal(props) {
               Ngày vào công ty
             </Label>
             <Col md={7}>
-              <Control.input
+              <Input
                 type="date"
-                model=".startDate"
                 id="startDate"
                 name="startDate"
                 className="form-control"
-                validators={{
-                  required: (val) => val,
-                }}
-              />
-              <Errors
-                model=".startDate"
-                className="text-danger"
-                messages={{
-                  required: "Yêu cầu bắt buộc ",
-                }}
               />
             </Col>
           </Row>
@@ -137,8 +98,8 @@ function AddStaffModal(props) {
               Phòng ban
             </Label>
             <Col md={7}>
-              <Control.select
-                model=".department"
+              <Input
+                type="select"
                 id="department"
                 name="department"
                 className="form-control"
@@ -149,8 +110,7 @@ function AddStaffModal(props) {
                 <option value="IT">IT</option>
                 <option value="Marketing">Marketing</option>
                 <option value="Sale">Sale</option>
-              </Control.select>
-              <Errors model=".department" />
+              </Input>
             </Col>
           </Row>
           {/* Salary Scale */}
@@ -159,25 +119,12 @@ function AddStaffModal(props) {
               Hệ số lương
             </Label>
             <Col md={7}>
-              <Control
-                model=".salaryScale"
+              <Input
                 id="salaryScale"
                 name="salaryScale"
                 placeHolder="1-3"
                 className="form-control"
                 defaultValue="1"
-                validators={{
-                  typeCheck: (val) => Number.parseInt(val),
-                  numRange: (val) => val > 0 && val < 4,
-                }}
-              />
-              <Errors
-                model=".salaryScale"
-                className="text-danger"
-                messages={{
-                  typeCheck: "Yêu cầu nhập số",
-                  numRange: "Yêu cầu nhập số từ 1-3",
-                }}
               />
             </Col>
           </Row>
@@ -187,22 +134,11 @@ function AddStaffModal(props) {
               Số ngày nghỉ còn lại
             </Label>
             <Col md={7}>
-              <Control
-                model=".annualLeave"
+              <Input
                 id="annualLeave"
                 name="annualLeave"
                 className="form-control"
                 defaultValue="0"
-                validators={{
-                  typeCheck: (val) => !Number.isNaN(Number(val)),
-                }}
-              />
-              <Errors
-                model=".annualLeave"
-                className="text-danger"
-                messages={{
-                  typeCheck: "Yêu cầu nhập số ",
-                }}
               />
             </Col>
           </Row>
@@ -212,22 +148,11 @@ function AddStaffModal(props) {
               Số ngày đã làm thêm
             </Label>
             <Col md={7}>
-              <Control
-                model=".overTime"
+              <Input
                 id="overTime"
                 name="overTime"
                 className="form-control"
                 defaultValue="0"
-                validators={{
-                  typeCheck: (val) => !Number.isNaN(Number(val)),
-                }}
-              />
-              <Errors
-                model=".overTime"
-                className="text-danger"
-                messages={{
-                  typeCheck: "Yêu cầu nhập số",
-                }}
               />
             </Col>
           </Row>
@@ -239,7 +164,7 @@ function AddStaffModal(props) {
               </Button>
             </Col>
           </Row>
-        </LocalForm>
+        </FormGroup>
       </ModalBody>
     </Modal>
   );
