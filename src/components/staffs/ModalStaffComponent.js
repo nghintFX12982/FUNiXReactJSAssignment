@@ -116,37 +116,7 @@ function AddStaffModal(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // props.toggleModal();
-    // Cannot use directly or clone DEPARTMENT due to READ-ONLY property
-    let departmentList = [
-      {
-        id: "Dept01",
-        name: "Sale",
-        numberOfStaff: 1,
-      },
-      {
-        id: "Dept02",
-        name: "HR",
-        numberOfStaff: 1,
-      },
-      {
-        id: "Dept03",
-        name: "Marketing",
-        numberOfStaff: 2,
-      },
-      {
-        id: "Dept04",
-        name: "IT",
-        numberOfStaff: 1,
-      },
-      {
-        id: "Dept05",
-        name: "Finance",
-        numberOfStaff: 11,
-      },
-    ];
-
-    departmentList.forEach((department, index) => {
+    props.departmentList.forEach((department, index) => {
       if (department.name === newStaff.department.name) {
         department.numberOfStaff += 1;
       }
@@ -156,7 +126,7 @@ function AddStaffModal(props) {
     setNewStaff({});
 
     props.setStaffList(staffList);
-    props.setDepartments(departmentList);
+    props.setDepartments(props.departmentList);
   }
 
   const closeBtn = (
