@@ -1,5 +1,6 @@
 import AddStaffModal from "./ModalStaffComponent";
 import BreadcrumbStaff from "./BreadcrumbStaffComponent";
+import { STAFFS } from "../../shared/staffs";
 
 import React, { useState } from "react";
 import {
@@ -43,9 +44,11 @@ const RenderFilterForm = () => {
 // -------------------------------
 // ----- Container Component -----
 function StaffPage(props) {
+  const [staffList, setStaffList] = useState(props.staffList);
   const [searchValue, setSearchValue] = useState("");
   const [currentDepartment, setCurrentDepartment] = useState("default");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(currentDepartment);
 
   // This function will update searchList when search box is blurred
   function handleBlur(e) {
@@ -62,9 +65,9 @@ function StaffPage(props) {
 
       setSearchValue("");
       setCurrentDepartment("default");
-      props.setStaffs(searchList);
+      setStaffList(searchList);
     } else {
-      props.setStaffs(props.staffList);
+      setStaffList(props.staffList);
     }
   }
 
@@ -79,7 +82,9 @@ function StaffPage(props) {
       );
     }
 
+    console.log(filteredValue);
     setCurrentDepartment(filteredValue);
+
     props.setStaffs(filteredList);
   }
 
@@ -89,7 +94,7 @@ function StaffPage(props) {
   }
 
   // staff will be rendered to RenderStaff Component
-  const staff = props.staffList.map((staff) => {
+  const staff = staffList.map((staff) => {
     return (
       <div className="col-6 col-md-4 col-xl-2 my-2">
         <RenderStaff staff={staff} match={props.match} />
@@ -110,6 +115,7 @@ function StaffPage(props) {
         />
         {/* ----- Modal form (Controlled Form) ----- */}
         <AddStaffModal
+          //TODO:
           staffList={props.staffList}
           departmentList={props.departmentList}
           isModalOpen={isModalOpen}

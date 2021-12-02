@@ -16,41 +16,88 @@ import {
 // ----- Controlled Form -----
 function AddStaffModal(props) {
   const staffList = [...props.staffList];
-  let newStaff = {};
-  let errors = { name: "", doB: "", startDate: "" };
+  const [newStaff, setNewStaff] = useState({});
+
   let [nameError, setNameError] = useState("Yêu cầu bắt buộc");
+  let [doBError, setDoBError] = useState("Yêu cầu bắt buộc");
+  let [startDateError, setStartDateError] = useState("Yêu cầu bắt buộc");
+  let [salaryScaleError, setSalaryScaleError] = useState("");
+  let [annualLeaveError, setAnnualLeaveError] = useState("");
+  let [overTimeError, setOverTimeError] = useState("");
 
   function handleInputChange(e) {
-    if (e.target.value) {
-      let staffKey = e.target.name;
-      let value = e.target.value;
-      newStaff[staffKey] = value;
+    let staffKey = e.target.name;
+    let value = e.target.value;
+    newStaff[staffKey] = value;
 
-      // Default value of department when add new staff is "Finance"
-      newStaff.department = newStaff.department || "Finance";
-      newStaff.salaryScale = newStaff.salaryScale || 1;
-      newStaff.annualLeave = newStaff.annualLeave || 0;
-      newStaff.overTime = newStaff.overTime || 0;
-
-      newStaff.id = staffList.length;
-      newStaff.image = "/assets/images/alberto.png";
-      props.departmentList.forEach((department) => {
-        if (newStaff.department === department.name) {
-          newStaff.department = department;
-        }
-      });
+    // Default value of department when add new staff is "Finance"
+    if ((staffKey = "department")) {
+      newStaff.department = newStaff[staffKey] || "Finance";
+    }
+    if ((staffKey = "salaryScale")) {
+      newStaff.salaryScale = newStaff[staffKey] || 1;
+    }
+    if ((staffKey = "annualLeave")) {
+      newStaff.annualLeave = newStaff[staffKey] || "0";
+    }
+    if ((staffKey = "overTime")) {
+      newStaff.overTime = newStaff[staffKey] || "0";
     }
 
-    // Call check valid function
-    checkValid();
+    newStaff.id = staffList.length;
+    newStaff.image = "/assets/images/alberto.png";
+    props.departmentList.forEach((department) => {
+      if (newStaff.department === department.name) {
+        newStaff.department = department;
+      }
+    });
+
+    setNewStaff(newStaff);
   }
 
+  // Function to check valid data
   function checkValid() {
     // Check name valid
     if (!newStaff.name || newStaff.name.length < 4) {
       setNameError("Yêu cầu nhập nhiều hơn 3 ký tự");
     } else {
       setNameError("");
+    }
+
+    // Check date of birth valid
+    if (!newStaff.doB) {
+      setDoBError("Yêu cầu bắt buộc");
+    } else {
+      setDoBError("");
+    }
+
+    // Check start date valid
+    if (!newStaff.startDate) {
+      setStartDateError("Yêu cầu bắt buộc");
+    } else {
+      setStartDateError("");
+    }
+
+    if (
+      Number(newStaff.salaryScale) &&
+      newStaff.salaryScale >= 1 &&
+      newStaff.salaryScale <= 3
+    ) {
+      setSalaryScaleError("");
+    } else {
+      setSalaryScaleError("Yêu cầu nhập số từ 1-3");
+    }
+
+    if (Number(newStaff.annualLeave) || newStaff.annualLeave === "0") {
+      setAnnualLeaveError("");
+    } else {
+      setAnnualLeaveError("Yêu cầu nhập số");
+    }
+
+    if (Number(newStaff.overTime) || newStaff.overTime === "0") {
+      setOverTimeError("");
+    } else {
+      setOverTimeError("Yêu cầu nhập số");
     }
   }
 
@@ -92,10 +139,9 @@ function AddStaffModal(props) {
         department.numberOfStaff += 1;
       }
     });
-    console.log(departmentList);
 
     staffList.push(newStaff);
-    newStaff = {};
+    setNewStaff({});
 
     props.setStaffList(staffList);
     props.setDepartments(departmentList);
@@ -115,8 +161,8 @@ function AddStaffModal(props) {
       <ModalBody>
         {/* ----- Uncontrolled Form ----- */}
         <Form onSubmit={handleSubmit}>
+          {/* Full name */}
           <FormGroup>
-            {/* Full name */}
             <Row className="form-group">
               <Label htmlFor="name" md={5}>
                 Họ tên
@@ -126,7 +172,10 @@ function AddStaffModal(props) {
                   id="name"
                   name="name"
                   className="form-control"
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    checkValid();
+                  }}
                   valid={nameError === ""}
                   invalid={nameError !== ""}
                 />
@@ -146,10 +195,14 @@ function AddStaffModal(props) {
                   id="doB"
                   name="doB"
                   className="form-control"
-                  onChange={handleInputChange}
-                  invalid={errors.doB}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    checkValid();
+                  }}
+                  valid={doBError === ""}
+                  invalid={doBError !== ""}
                 />
-                <FormFeedback>Hello</FormFeedback>
+                <FormFeedback>{doBError}</FormFeedback>
               </Col>
             </Row>
           </FormGroup>
@@ -165,8 +218,14 @@ function AddStaffModal(props) {
                   id="startDate"
                   name="startDate"
                   className="form-control"
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    checkValid();
+                  }}
+                  valid={startDateError === ""}
+                  invalid={startDateError !== ""}
                 />
+                <FormFeedback>{startDateError}</FormFeedback>
               </Col>
             </Row>
           </FormGroup>
@@ -206,8 +265,14 @@ function AddStaffModal(props) {
                   placeHolder="1-3"
                   className="form-control"
                   defaultValue="1"
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    checkValid();
+                  }}
+                  valid={salaryScaleError === ""}
+                  invalid={salaryScaleError !== ""}
                 />
+                <FormFeedback>{salaryScaleError}</FormFeedback>
               </Col>
             </Row>
           </FormGroup>
@@ -223,8 +288,14 @@ function AddStaffModal(props) {
                   name="annualLeave"
                   className="form-control"
                   defaultValue="0"
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    checkValid();
+                  }}
+                  valid={annualLeaveError === ""}
+                  invalid={annualLeaveError !== ""}
                 />
+                <FormFeedback>{annualLeaveError}</FormFeedback>
               </Col>
             </Row>
           </FormGroup>
@@ -240,8 +311,14 @@ function AddStaffModal(props) {
                   name="overTime"
                   className="form-control"
                   defaultValue="0"
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    checkValid();
+                  }}
+                  valid={overTimeError === ""}
+                  invalid={overTimeError !== ""}
                 />
+                <FormFeedback>{overTimeError}</FormFeedback>
               </Col>
             </Row>
           </FormGroup>
