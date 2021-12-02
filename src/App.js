@@ -7,11 +7,11 @@ import StaffDetailPage from "./components/StaffDetailPage";
 import DepartmentPage from "./components/departments/DepartmentComponent";
 import SalaryPage from "./components/SalaryPage";
 
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
-  const staffs = [...STAFFS];
+  const [staffs, setStaffs] = useState(STAFFS);
   const departments = [...DEPARTMENTS];
 
   const StaffWithId = ({ match }) => {
@@ -34,7 +34,12 @@ function App() {
         <Route
           path="/staff"
           component={({ match }) => (
-            <StaffPage staffList={staffs} match={match} />
+            <StaffPage
+              staffList={staffs}
+              departmentList={departments}
+              match={match}
+              setStaffs={setStaffs}
+            />
           )}
           exact
         />

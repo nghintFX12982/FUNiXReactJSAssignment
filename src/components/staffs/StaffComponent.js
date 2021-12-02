@@ -43,9 +43,7 @@ const RenderFilterForm = () => {
 // -------------------------------
 // ----- Container Component -----
 function StaffPage(props) {
-  const [staffList, setStaffList] = useState(props.staffList);
   const [searchValue, setSearchValue] = useState("");
-  // const [searchList, setSearchList] = useState(props.staffList);
   const [currentDepartment, setCurrentDepartment] = useState("default");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -63,10 +61,10 @@ function StaffPage(props) {
       );
 
       setSearchValue("");
-      setStaffList(searchList);
+      props.setStaffs(searchList);
       setCurrentDepartment("default");
     } else {
-      setStaffList(props.staffList);
+      props.setStaffs(props.staffList);
     }
   }
 
@@ -82,7 +80,7 @@ function StaffPage(props) {
     }
 
     setCurrentDepartment(filteredValue);
-    setStaffList(filteredList);
+    props.setStaffs(filteredList);
   }
 
   // This function will set true/false for isModalOpen flag
@@ -91,7 +89,7 @@ function StaffPage(props) {
   }
 
   // staff will be rendered to RenderStaff Component
-  const staff = staffList.map((staff) => {
+  const staff = props.staffList.map((staff) => {
     return (
       <div className="col-6 col-md-4 col-xl-2 my-2">
         <RenderStaff staff={staff} match={props.match} />
@@ -112,9 +110,10 @@ function StaffPage(props) {
         />
         {/* ----- Modal form (Controlled Form) ----- */}
         <AddStaffModal
-          staffList={staffList}
+          staffList={props.staffList}
           isModalOpen={isModalOpen}
           toggleModal={toggleModal}
+          setStaffList={props.setStaffs}
         />
         {/* Filter form */}
         <div className="row">
