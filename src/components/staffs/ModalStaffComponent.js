@@ -29,11 +29,17 @@ function AddStaffModal(props) {
 
     departmentList.forEach((department, index) => {
       if (department.name === newStaff.department) {
-        newStaff.department = departmentList[index];
+        newStaff.department = department;
       }
     });
 
-    // console.log(addDepartment(newStaff).payload);
+    let localStaff = localStorage.getItem("newStaff")
+      ? JSON.parse(localStorage.getItem("newStaff"))
+      : [];
+
+    localStaff.push(newStaff);
+    localStorage.setItem("newStaff", JSON.stringify(localStaff));
+
     dispatch(addStaff(newStaff));
     dispatch(addDepartment(newStaff));
   }
