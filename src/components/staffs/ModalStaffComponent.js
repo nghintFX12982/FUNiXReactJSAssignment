@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Modal,
@@ -8,6 +8,7 @@ import {
   FormGroup,
   Input,
   Label,
+  FormFeedback,
   Row,
   Col,
 } from "reactstrap";
@@ -16,6 +17,8 @@ import {
 function AddStaffModal(props) {
   const staffList = [...props.staffList];
   let newStaff = {};
+  let errors = { name: "", doB: "", startDate: "" };
+  let [nameError, setNameError] = useState("Yêu cầu bắt buộc");
 
   function handleInputChange(e) {
     if (e.target.value) {
@@ -36,6 +39,18 @@ function AddStaffModal(props) {
           newStaff.department = department;
         }
       });
+    }
+
+    // Call check valid function
+    checkValid();
+  }
+
+  function checkValid() {
+    // Check name valid
+    if (!newStaff.name || newStaff.name.length < 4) {
+      setNameError("Yêu cầu nhập nhiều hơn 3 ký tự");
+    } else {
+      setNameError("");
     }
   }
 
@@ -112,7 +127,10 @@ function AddStaffModal(props) {
                   name="name"
                   className="form-control"
                   onChange={handleInputChange}
+                  valid={nameError === ""}
+                  invalid={nameError !== ""}
                 />
+                <FormFeedback>{nameError}</FormFeedback>
               </Col>
             </Row>
           </FormGroup>
@@ -129,7 +147,9 @@ function AddStaffModal(props) {
                   name="doB"
                   className="form-control"
                   onChange={handleInputChange}
+                  invalid={errors.doB}
                 />
+                <FormFeedback>Hello</FormFeedback>
               </Col>
             </Row>
           </FormGroup>
