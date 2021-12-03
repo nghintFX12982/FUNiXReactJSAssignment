@@ -19,7 +19,15 @@ const Header = (props) => {
     <div id="navbar">
       <Navbar color="light" light expand="md">
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <Collapse
+          isOpen={isOpen}
+          onClick={() => {
+            if (isOpen === true) {
+              toggle();
+            }
+          }}
+          navbar
+        >
           <Nav className="mr-auto" navbar>
             <NavItem>
               <RouterLink to="/staff">
