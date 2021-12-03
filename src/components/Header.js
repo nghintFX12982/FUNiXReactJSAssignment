@@ -12,7 +12,6 @@ import { NavLink as RouterLink } from "react-router-dom";
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  let inputName = document.getElementById("input-name");
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -20,7 +19,7 @@ const Header = (props) => {
     <div id="navbar">
       <Navbar color="light" light expand="md">
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <Collapse isOpen={isOpen} onClick={toggle} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
               <RouterLink to="/staff">

@@ -1,6 +1,5 @@
 import AddStaffModal from "./ModalStaffComponent";
 import BreadcrumbStaff from "./BreadcrumbStaffComponent";
-import { STAFFS } from "../../shared/staffs";
 
 import React, { useState } from "react";
 import {
@@ -62,7 +61,6 @@ function StaffPage(props) {
           staff.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
       );
 
-      // setSearchValue("");
       setCurrentDepartment("default");
       setStaffList(searchList);
     } else {
@@ -112,7 +110,6 @@ function StaffPage(props) {
         />
         {/* ----- Modal form (Controlled Form) ----- */}
         <AddStaffModal
-          //TODO:
           staffList={props.staffList}
           departmentList={props.departmentList}
           isModalOpen={isModalOpen}
