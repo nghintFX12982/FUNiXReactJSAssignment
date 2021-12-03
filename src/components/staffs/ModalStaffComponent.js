@@ -69,14 +69,14 @@ function AddStaffModal(props) {
                 name="name"
                 className="form-control"
                 validators={{
-                  lenRange: (val) => val && val.length >= 3 && val.length <= 15,
+                  lenRange: (val) => val && val.length > 3,
                 }}
               />
               <Errors
                 model=".name"
                 className="text-danger"
                 messages={{
-                  lenRange: "Yêu cầu nhập từ 3-15 ký tự",
+                  lenRange: "Yêu cầu nhiều hơn 3 ký tự",
                 }}
               />
             </Col>
@@ -167,7 +167,7 @@ function AddStaffModal(props) {
                 className="form-control"
                 defaultValue="1"
                 validators={{
-                  typeCheck: (val) => Number.parseInt(val),
+                  typeCheck: (val) => !Number.isNaN(Number(val)),
                   numRange: (val) => val > 0 && val < 4,
                 }}
               />

@@ -12,7 +12,6 @@ import { NavLink as RouterLink } from "react-router-dom";
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  let inputName = document.getElementById("input-name");
 
   const toggle = () => setIsOpen(!isOpen);
 
