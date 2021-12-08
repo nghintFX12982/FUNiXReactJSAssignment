@@ -1,4 +1,4 @@
-import { addStaff } from "./staffSlice";
+// import { addStaff } from "./staffSlice";
 import { addDepartment } from "../departments/departmentSlice";
 
 import React, { useState } from "react";
@@ -40,7 +40,7 @@ function AddStaffModal(props) {
     localStaff.push(newStaff);
     localStorage.setItem("newStaff", JSON.stringify(localStaff));
 
-    dispatch(addStaff(newStaff));
+    // dispatch(addStaff(newStaff));
     dispatch(addDepartment(newStaff));
   }
 

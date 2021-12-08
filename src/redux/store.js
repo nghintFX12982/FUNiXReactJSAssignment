@@ -1,15 +1,16 @@
 // Can use any name for export default
 import staffReducer from "../components/staffs/staffSlice";
 import departmentReducer from "../components/departments/departmentSlice";
-import { configureStore } from "@reduxjs/toolkit";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
 
-const rootReducer = {
-  staff: staffReducer,
-  department: departmentReducer,
-};
-
-const store = configureStore({
-  reducer: rootReducer,
-});
+const store = createStore(
+  combineReducers({
+    staff: staffReducer,
+    department: departmentReducer,
+  }),
+  applyMiddleware(logger, thunk)
+);
 
 export default store;

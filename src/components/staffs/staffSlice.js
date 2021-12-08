@@ -1,28 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { STAFFS } from "../../shared/staffs";
+const Staff = (state = { staffs: [] }, action) => {
+  switch (action.type) {
+    case "staff/add":
+      console.log("staff/add");
+      return {
+        ...state,
+        staffs: action.payload,
+      };
+    default:
+      console.log("default");
+      return state;
+  }
+};
 
-const currentStaffList = [...STAFFS];
-
-// Get data from local storage and update to current staff list if available
-if (localStorage.getItem("newStaff")) {
-  const localData = JSON.parse(localStorage.getItem("newStaff"));
-  localData.forEach((data) => {
-    currentStaffList.push(data);
-  });
-}
-
-const staffSlice = createSlice({
-  name: "staff",
-  initialState: currentStaffList,
-  reducers: {
-    addStaff: (state, action) => {
-      //state will get from initialState
-      //state is current state of reducer
-      state.push(action.payload);
-    },
-  },
-});
-
-const { actions, reducer } = staffSlice;
-export const { addStaff } = actions;
-export default reducer;
+// const { actions, reducer } = staffSlice;
+// export const { addStaff } = actions;
+// export default reducer;
+export default Staff;
