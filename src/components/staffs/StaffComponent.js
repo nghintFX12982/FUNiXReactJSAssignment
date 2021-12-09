@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 // ------------------------------------
 // ----- Presentational Component -----
 const RenderStaff = ({ match, staff }) => {
+  console.log(staff.image);
   return (
     <Card className="staff-img">
       <Link to={`${match.path}/${staff.id}`}>

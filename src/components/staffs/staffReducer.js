@@ -1,4 +1,9 @@
-const Staff = (state = { staffs: [] }, action) => {
+const Staff = (
+  state = {
+    staffs: [],
+  },
+  action
+) => {
   switch (action.type) {
     case "staff/add":
       console.log("staff/add");
@@ -8,11 +13,9 @@ const Staff = (state = { staffs: [] }, action) => {
       };
     default:
       console.log("default");
+      console.log(state);
       return state;
   }
 };
 
-// const { actions, reducer } = staffSlice;
-// export const { addStaff } = actions;
-// export default reducer;
 export default Staff;

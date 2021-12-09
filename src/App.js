@@ -16,10 +16,11 @@ function App() {
   const departments = useSelector((state) => state.department);
   const dispatch = useDispatch();
 
+  console.log(staffs);
+
   useEffect(() => {
-    console.log("useEffect");
     dispatch(fetchStaff());
-  });
+  }, []);
 
   const StaffWithId = ({ match }) => {
     return (
