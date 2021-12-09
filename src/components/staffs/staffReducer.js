@@ -1,19 +1,24 @@
 const Staff = (
   state = {
+    isLoading: true,
     staffs: [],
   },
   action
 ) => {
   switch (action.type) {
-    case "staff/add":
-      console.log("staff/add");
+    case "staff/loading":
       return {
         ...state,
+        isLoading: true,
+        staffs: [],
+      };
+    case "staff/add":
+      return {
+        ...state,
+        isLoading: false,
         staffs: action.payload,
       };
     default:
-      console.log("default");
-      console.log(state);
       return state;
   }
 };

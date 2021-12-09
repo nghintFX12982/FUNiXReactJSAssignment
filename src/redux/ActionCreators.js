@@ -1,10 +1,8 @@
 import { baseUrl } from "../shared/baseUrl";
 
-// Fetch staff data from baseUrl
+// ----- Fetch staff data from baseUrl -----
 export const fetchStaff = () => (dispatch) => {
-  console.log("fetchStaff");
-
-  return fetch(baseUrl)
+  return fetch(baseUrl + "staffs")
     .then(
       (res) => {
         if (res.ok) {

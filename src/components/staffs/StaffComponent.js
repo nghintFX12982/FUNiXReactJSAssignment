@@ -1,5 +1,6 @@
 import AddStaffModal from "./ModalStaffComponent";
 import BreadcrumbStaff from "./BreadcrumbStaffComponent";
+import { Loading } from "../LoadingComponent";
 
 import React, { useState } from "react";
 import {
@@ -15,7 +16,6 @@ import { Link } from "react-router-dom";
 // ------------------------------------
 // ----- Presentational Component -----
 const RenderStaff = ({ match, staff }) => {
-  console.log(staff.image);
   return (
     <Card className="staff-img">
       <Link to={`${match.path}/${staff.id}`}>
@@ -91,7 +91,8 @@ function StaffPage(props) {
   }
 
   // staff will be rendered to RenderStaff Component
-  const staff = staffList.map((staff) => {
+  const staff = props.staffList.map((staff) => {
+    console.log("render staff 1");
     return (
       <div className="col-6 col-md-4 col-xl-2 my-2">
         <RenderStaff staff={staff} match={props.match} />
@@ -103,6 +104,7 @@ function StaffPage(props) {
     <React.Fragment>
       <div className="container">
         {/* ----- Breadcrumb and Search Section ------ */}
+        {console.log("staff component return")}
         <BreadcrumbStaff
           match={props.match}
           toggleModal={toggleModal}
@@ -115,7 +117,7 @@ function StaffPage(props) {
           isModalOpen={isModalOpen}
           toggleModal={toggleModal}
         />
-        {/* Filter form */}
+        {/* ----- Filter form ----- */}
         <div className="row">
           <div className="col-12 col-md-4">
             <FormGroup>
@@ -133,7 +135,11 @@ function StaffPage(props) {
         {/* ---------- */}
         {/* Staff Render Section */}
         {/* ---------- */}
+        {props.isLoading && <Loading />}
+        {console.log("loading")}
         <div className="row">{staff}</div>
+        <div className="row">{console.log(props.staffList)}</div>
+        {console.log("after render staff")}
       </div>
     </React.Fragment>
   );
