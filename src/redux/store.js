@@ -1,6 +1,7 @@
 // Can use any name for export default
 import staffReducer from "../components/staffs/staffReducer";
-import departmentReducer from "../components/departments/departmentSlice";
+import departmentReducer from "../components/departments/departmentReducer";
+
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import thunk from "redux-thunk";

@@ -1,3 +1,5 @@
+import { Loading } from "../LoadingComponent";
+
 import React from "react";
 import { Jumbotron } from "reactstrap";
 
@@ -12,8 +14,8 @@ const RenderDepartment = ({ department }) => {
 };
 
 // ----- Container Component -----
-function DepartmentPage({ departmentList }) {
-  const department = departmentList.map((department) => {
+function Department(props) {
+  const department = props.departments.departments.map((department) => {
     return (
       <div className="col-12 col-md-6 col-xl-4">
         <RenderDepartment department={department} />
@@ -21,11 +23,15 @@ function DepartmentPage({ departmentList }) {
     );
   });
 
-  return (
-    <div className="container">
-      <div className="row">{department}</div>
-    </div>
-  );
+  if (props.departments.isLoading) {
+    return "";
+  } else {
+    return (
+      <div className="container">
+        <div className="row">{department}</div>
+      </div>
+    );
+  }
 }
 
-export default DepartmentPage;
+export default Department;

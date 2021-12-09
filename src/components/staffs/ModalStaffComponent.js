@@ -1,5 +1,5 @@
 // import { addStaff } from "./staffSlice";
-import { addDepartment } from "../departments/departmentSlice";
+// import { addDepartment } from "../departments/departmentReducer";
 
 import React, { useState } from "react";
 import {
@@ -41,7 +41,7 @@ function AddStaffModal(props) {
     localStorage.setItem("newStaff", JSON.stringify(localStaff));
 
     // dispatch(addStaff(newStaff));
-    dispatch(addDepartment(newStaff));
+    // dispatch(addDepartment(newStaff));
   }
 
   const closeBtn = (
