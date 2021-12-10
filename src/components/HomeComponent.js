@@ -1,15 +1,14 @@
-import { fetchStaff } from "../redux/ActionCreators";
-import StaffPage from "./staffs/StaffComponent";
-import StaffDetailPage from "./StaffDetailPage";
+import Staff from "./staffs/StaffComponent";
+import StaffDetail from "./staffs/StaffDetailComponent";
 
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
 
 const Home = (props) => {
   if (props.match.params.staffid) {
     console.log("Staff Detail");
+    // Render info of each staff
     return (
-      <StaffDetailPage
+      <StaffDetail
         staff={
           props.staffs.staffs.filter(
             (staff) =>
@@ -21,8 +20,9 @@ const Home = (props) => {
     );
   } else {
     console.log("Staff Page");
+    // Render all staffs
     return (
-      <StaffPage
+      <Staff
         staffList={props.staffs.staffs}
         match={props.match}
         isLoading={props.staffs.isLoading}

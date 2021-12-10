@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, Card, CardImg, List } from "reactstrap";
 import dateFormat from "dateformat";
-import { Loading } from "./LoadingComponent";
+import { Loading } from "../LoadingComponent";
 
 // ----- Presentational Component -----
 const RenderBreadcrumb = ({ staff, isLoading }) => {
@@ -50,7 +50,7 @@ const RenderDetail = ({ staff, isLoading }) => {
 };
 
 // ----- Container Component -----
-function StaffDetailPage({ staff, isLoading }) {
+function StaffDetail({ staff, isLoading }) {
   console.log(staff);
   console.log(isLoading);
   return (
@@ -78,4 +78,4 @@ function StaffDetailPage({ staff, isLoading }) {
   );
 }
 
-export default StaffDetailPage;
+export default StaffDetail;

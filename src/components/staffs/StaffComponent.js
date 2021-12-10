@@ -1,33 +1,14 @@
 import AddStaffModal from "./ModalStaffComponent";
 import BreadcrumbStaff from "./BreadcrumbStaffComponent";
 import { Loading } from "../LoadingComponent";
+import { RenderStaff } from "../features/RenderStaff";
 
 import React, { useState } from "react";
-import {
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  FormGroup,
-  Input,
-} from "reactstrap";
+import { FormGroup, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 
 // ------------------------------------
 // ----- Presentational Component -----
-const RenderStaff = ({ match, staff }) => {
-  return (
-    <Card className="staff-img">
-      <Link to={`${match.path}/${staff.id}`}>
-        <CardImg src={staff.image} alt={staff.name} />
-      </Link>
-      <CardBody>
-        <CardTitle>{staff.name}</CardTitle>
-      </CardBody>
-    </Card>
-  );
-};
-
 const RenderFilterForm = () => {
   return (
     <React.Fragment>
@@ -43,7 +24,7 @@ const RenderFilterForm = () => {
 
 // -------------------------------
 // ----- Container Component -----
-function StaffPage(props) {
+function Staff(props) {
   const [staffList, setStaffList] = useState(props.staffList);
   const [searchList, setSearchList] = useState(props.staffList);
   const [currentDepartment, setCurrentDepartment] = useState("default");
@@ -90,16 +71,6 @@ function StaffPage(props) {
     setIsModalOpen(!isModalOpen);
   }
 
-  // staff will be rendered to RenderStaff Component
-  const staff = props.staffList.map((staff) => {
-    console.log("render staff 1");
-    return (
-      <div className="col-6 col-md-4 col-xl-2 my-2">
-        <RenderStaff staff={staff} match={props.match} />
-      </div>
-    );
-  });
-
   return (
     <React.Fragment>
       <div className="container">
@@ -135,14 +106,14 @@ function StaffPage(props) {
         {/* ---------- */}
         {/* Staff Render Section */}
         {/* ---------- */}
-        {props.isLoading && <Loading />}
-        {console.log("loading")}
-        <div className="row">{staff}</div>
-        <div className="row">{console.log(props.staffList)}</div>
-        {console.log("after render staff")}
+        <RenderStaff
+          staffList={props.staffList}
+          match={props.match}
+          isLoading={props.isLoading}
+        />
       </div>
     </React.Fragment>
   );
 }
 
-export default StaffPage;
+export default Staff;

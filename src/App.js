@@ -1,5 +1,5 @@
 import "./App.css";
-import { fetchStaff, fetchDepartment } from "./redux/ActionCreators";
+import { fetchData } from "./redux/ActionCreators";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/HomeComponent";
@@ -19,12 +19,15 @@ function App() {
   const routes = [
     { name: "HomePage", path: "/staff", Component: Home },
     { name: "StaffDetail", path: "/staff/:staffid", Component: Home },
-    { name: "DepartmentPage", path: "/department", Component: Department },
+    { name: "DeptPage", path: "/department", Component: Department },
+    { name: "DeptStaff", path: "/department/:deptId", Component: Department },
   ];
 
   useEffect(() => {
-    dispatch(fetchStaff());
-    dispatch(fetchDepartment());
+    dispatch((dispatch) => {
+      fetchData(dispatch, "staffs");
+      fetchData(dispatch, "departments");
+    });
   }, []);
 
   return (

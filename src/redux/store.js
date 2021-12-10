@@ -1,6 +1,7 @@
 // Can use any name for export default
 import staffReducer from "../components/staffs/staffReducer";
 import departmentReducer from "../components/departments/departmentReducer";
+import departmentStaffReducer from "../components/departments/departmentStaffReducer";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
@@ -10,6 +11,7 @@ const store = createStore(
   combineReducers({
     staff: staffReducer,
     department: departmentReducer,
+    departmentStaff: departmentStaffReducer,
   }),
   applyMiddleware(logger, thunk)
 );
