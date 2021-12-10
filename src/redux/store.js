@@ -2,6 +2,7 @@
 import staffReducer from "../components/staffs/staffReducer";
 import departmentReducer from "../components/departments/departmentReducer";
 import departmentStaffReducer from "../components/departments/departmentStaffReducer";
+import salaryReducer from "../components/salary/salaryReducer";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
@@ -12,6 +13,7 @@ const store = createStore(
     staff: staffReducer,
     department: departmentReducer,
     departmentStaff: departmentStaffReducer,
+    salary: salaryReducer,
   }),
   applyMiddleware(logger, thunk)
 );

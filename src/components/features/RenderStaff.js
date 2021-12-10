@@ -5,17 +5,29 @@ import { Card, CardImg, CardBody, CardTitle } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export const RenderStaff = (props) => {
+  //Error case
+  if (props.errmess) {
+    console.log("error");
+    return <h4 style={{ marginTop: "40px" }}>{props.errmess}</h4>;
+  }
+
+  // Loading case
   if (props.isLoading) {
     return <Loading />;
-  } else {
+  }
+
+  // Success case
+  if (!props.isLoading) {
     return (
       <div className="row">
         {props.staffList.map((staff) => (
-          <div className="col-6 col-md-4 col-xl-2 my-2">
+          <div key={staff.id} className="col-6 col-md-4 col-xl-2 my-2">
             <Card className="staff-img">
-              <Link to={`${props.match.path}/${staff.id}`}>
+              {/* Image part */}
+              <Link to={`/staff/${staff.id}`}>
                 <CardImg src={staff.image} alt={staff.name} />
               </Link>
+              {/* Body part with staff name */}
               <CardBody>
                 <CardTitle>{staff.name}</CardTitle>
               </CardBody>

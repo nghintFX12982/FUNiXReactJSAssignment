@@ -4,9 +4,8 @@ import StaffDetail from "./staffs/StaffDetailComponent";
 import React from "react";
 
 const Home = (props) => {
+  // Render each staff
   if (props.match.params.staffid) {
-    console.log("Staff Detail");
-    // Render info of each staff
     return (
       <StaffDetail
         staff={
@@ -18,9 +17,10 @@ const Home = (props) => {
         isLoading={props.staffs.isLoading}
       />
     );
-  } else {
-    console.log("Staff Page");
-    // Render all staffs
+  }
+
+  // Render all staffs
+  if (!props.match.params.staffid) {
     return (
       <Staff
         staffList={props.staffs.staffs}

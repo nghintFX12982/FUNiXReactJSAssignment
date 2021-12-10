@@ -7,14 +7,15 @@ const DepartmentStaff = (
   action
 ) => {
   switch (action.type) {
-    case "departmentstaffs/loading":
+    case "department-staffs/loading":
       return {
         ...state,
         errmess: null,
         isLoading: true,
         departmentstaffs: [],
       };
-    case "departmentstaffs/fail":
+
+    case "department-staffs/fail":
       return {
         ...state,
         errmess: action.payload,
@@ -22,13 +23,14 @@ const DepartmentStaff = (
         departmentstaffs: [],
       };
 
-    case "departmentstaffs/add":
+    case "department-staffs/add":
       return {
         ...state,
-        errmess: [],
+        errmess: null,
         isLoading: false,
         departmentstaffs: action.payload,
       };
+
     default:
       return state;
   }

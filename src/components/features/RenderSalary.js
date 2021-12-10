@@ -1,0 +1,46 @@
+import { Loading } from "../LoadingComponent";
+
+import React from "react";
+import { Button, Card, CardText, Jumbotron } from "reactstrap";
+const formatDecimal = require("format-decimal");
+
+export const RenderSalary = (props) => {
+  // Error case
+  if (props.errmess) {
+    return <h4 style={{ marginTop: "40px" }}>{props.errmess}</h4>;
+  }
+
+  // Loading case
+  if (props.isLoading) {
+    return <Loading />;
+  }
+
+  // Success case
+  if (!props.isLoading) {
+    console.log(props.staffList);
+    return (
+      <div className="row">
+        {props.staffList.map((staff) => (
+          <div key={staff.id} className="col-12 col-md-6 col-xl-4">
+            <Jumbotron style={{ textAlign: "left" }}>
+              <h2 className="py-3">{staff.name}</h2>
+              <p>Mã nhân viên: {staff.id}</p>
+              <p>Hệ số lương: {staff.salaryScale}</p>
+              <p>Số giờ làm thêm: {staff.overTime}</p>
+              <Card className="p-1">
+                <CardText>
+                  Lương:{" "}
+                  {formatDecimal(staff.salary, {
+                    decimal: ".",
+                    thousands: ",",
+                    precision: 0,
+                  })}
+                </CardText>
+              </Card>
+            </Jumbotron>
+          </div>
+        ))}
+      </div>
+    );
+  }
+};

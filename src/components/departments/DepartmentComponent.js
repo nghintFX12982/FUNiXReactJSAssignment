@@ -1,5 +1,6 @@
 import { fetchData } from "../../redux/ActionCreators";
 import { RenderStaff } from "../features/RenderStaff";
+import { Loading } from "../LoadingComponent";
 
 import React, { useState, useEffect } from "react";
 import { Jumbotron } from "reactstrap";
@@ -8,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 // ----- Presentational Component -----
 const RenderDepartment = (props) => {
-  console.log(props);
+  // Render department: department name + number of staff
   return (
     <Jumbotron>
       <Link to={`${props.match.path}/${props.department.id}`}>
@@ -30,36 +31,42 @@ function Department(props) {
     });
   }, []);
 
-  console.log(departmentStaff);
-
+  // --- Renders staff of each department
   if (props.match.params.deptId) {
-    if (departmentStaff.isLoading) {
-      return "";
-    } else if (departmentStaff.errmess) {
-      return <h4 style={{ marginTop: "80px" }}>{departmentStaff.errmess}</h4>;
-    } else {
+    console.log(departmentStaff.departmentstaffs);
+    return (
+      <div className="container">
+        <RenderStaff
+          staffList={departmentStaff.departmentstaffs}
+          match={props.match}
+          isLoading={departmentStaff.isLoading}
+          errmess={departmentStaff.errmess}
+        />
+      </div>
+    );
+  }
+
+  // --- Render all departments
+  if (!props.match.params.deptId) {
+    // Loading case
+    if (props.departments.isLoading) {
+      return <Loading />;
+    }
+
+    // Success case
+    if (!props.departments.isLoading) {
       return (
         <div className="container">
-          <RenderStaff
-            staffList={departmentStaff.departmentstaffs}
-            match={props.match}
-            isLoading={props.isLoading}
-          />
+          <div className="row">
+            {props.departments.departments.map((department) => (
+              <div key={department.id} className="col-12 col-md-6 col-xl-4">
+                <RenderDepartment department={department} match={props.match} />
+              </div>
+            ))}
+          </div>
         </div>
       );
     }
-  } else {
-    return (
-      <div className="container">
-        <div className="row">
-          {props.departments.departments.map((department) => (
-            <div className="col-12 col-md-6 col-xl-4">
-              <RenderDepartment department={department} match={props.match} />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
   }
 }
 
