@@ -1,7 +1,7 @@
 import { Loading } from "../LoadingComponent";
 
 import React from "react";
-import { Button, Card, CardText, Jumbotron } from "reactstrap";
+import { Card, CardText, Jumbotron } from "reactstrap";
 const formatDecimal = require("format-decimal");
 
 export const RenderSalary = (props) => {
