@@ -1,6 +1,3 @@
-// import { addStaff } from "./staffSlice";
-// import { addDepartment } from "../departments/departmentReducer";
-
 import React, { useState } from "react";
 import {
   Button,
@@ -27,18 +24,20 @@ function AddStaffModal(props) {
     newStaff.id = staffList.length;
     newStaff.image = "/assets/images/alberto.png";
 
-    departmentList.forEach((department, index) => {
-      if (department.name === newStaff.department) {
-        newStaff.department = department;
-      }
-    });
+    console.log(newStaff);
 
-    let localStaff = localStorage.getItem("newStaff")
-      ? JSON.parse(localStorage.getItem("newStaff"))
-      : [];
+    // departmentList.forEach((department, index) => {
+    //   if (department.name === newStaff.department) {
+    //     newStaff.department = department;
+    //   }
+    // });
 
-    localStaff.push(newStaff);
-    localStorage.setItem("newStaff", JSON.stringify(localStaff));
+    // let localStaff = localStorage.getItem("newStaff")
+    //   ? JSON.parse(localStorage.getItem("newStaff"))
+    //   : [];
+
+    // localStaff.push(newStaff);
+    // localStorage.setItem("newStaff", JSON.stringify(localStaff));
 
     // dispatch(addStaff(newStaff));
     // dispatch(addDepartment(newStaff));

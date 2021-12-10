@@ -39,7 +39,7 @@ export const addSalary = (staffList) => {
   };
 };
 
-// ----------- Fetch data from baseUrl -----------
+// ----------- Get data from baseUrl -----------
 const dispatchList = [
   { name: "staff", params: "staffs", action: addStaff },
   { name: "department", params: "departments", action: addDepartments },
@@ -84,3 +84,5 @@ export const fetchData = (dispatch, params) => {
       })
   );
 };
+
+// ---------- Push data to baseUrl ----------

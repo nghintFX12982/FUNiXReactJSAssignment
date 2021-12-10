@@ -1,11 +1,10 @@
 import AddStaffModal from "./ModalStaffComponent";
-import BreadcrumbStaff from "./BreadcrumbStaffComponent";
+import StaffBreadcrumb from "./BreadcrumbComponent";
 import { Loading } from "../LoadingComponent";
 import { RenderStaff } from "../features/RenderStaff";
 
 import React, { useState } from "react";
 import { FormGroup, Input } from "reactstrap";
-import { Link } from "react-router-dom";
 
 // ------------------------------------
 // ----- Presentational Component -----
@@ -30,23 +29,30 @@ function Staff(props) {
   const [currentDepartment, setCurrentDepartment] = useState("default");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // This function will update searchList when search box is blurred
+  // ----- Update searchList when search box is blurred -----
   function handleBlur(e) {
     const searchValue = e.target.value;
+
+    // Reset search list
     setSearchList(props.staffList);
 
+    // Create new search list & update to searchList
     if (searchValue !== "") {
-      setSearchList(
-        props.staffList.filter(
-          (staff) =>
-            staff.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
-        )
-      );
+      const list = props.staffList.filter((staff) => {
+        const lowerName = staff.name.toLowerCase();
+        const lowerValue = searchValue.toLowerCase();
+
+        return lowerName.indexOf(lowerValue) !== -1;
+      });
+
+      setSearchList(list);
     }
   }
 
-  // This function will set staffList as searchList & re-render when click "find" button
+  // ----- Re-render list when click "find" button -----
   function handleClick(e) {
+    console.log("click");
+    console.log(searchList);
     setCurrentDepartment("default");
     setStaffList(searchList);
   }
@@ -75,19 +81,20 @@ function Staff(props) {
     <React.Fragment>
       <div className="container">
         {/* ----- Breadcrumb and Search Section ------ */}
-        {console.log("staff component return")}
-        <BreadcrumbStaff
+        <StaffBreadcrumb
           match={props.match}
           toggleModal={toggleModal}
           handleBlur={handleBlur}
           handleClick={handleClick}
         />
+
         {/* ----- Modal form ----- */}
         <AddStaffModal
           staffList={staffList}
           isModalOpen={isModalOpen}
           toggleModal={toggleModal}
         />
+
         {/* ----- Filter form ----- */}
         <div className="row">
           <div className="col-12 col-md-4">
@@ -103,11 +110,10 @@ function Staff(props) {
             </FormGroup>
           </div>
         </div>
-        {/* ---------- */}
+
         {/* Staff Render Section */}
-        {/* ---------- */}
         <RenderStaff
-          staffList={props.staffList}
+          staffList={staffList}
           match={props.match}
           isLoading={props.isLoading}
         />

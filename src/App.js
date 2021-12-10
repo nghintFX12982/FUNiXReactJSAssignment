@@ -42,6 +42,7 @@ function App() {
       {/* ----- Router Section ----- */}
       {/* Route with 3 props: path, component & exact */}
       <Switch>
+        {/* Route for each path */}
         {routes.map(({ path, Component }) => {
           return (
             <Route
@@ -59,12 +60,7 @@ function App() {
             />
           );
         })}
-        {/* <Route
-          path="/salary"
-          component={({ match }) => (
-            <SalaryPage staffList={staffs} match={match} />
-          )}
-        /> */}
+        {/* Redirect */}
         <Redirect from="/" to="/staff" />
       </Switch>
 
