@@ -1,6 +1,6 @@
 import { postData } from "../../redux/ActionCreators";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Modal,
@@ -9,25 +9,18 @@ import {
   Label,
   Row,
   Col,
-  TabContent,
-  TabPane,
 } from "reactstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
-function AddStaffModal(props) {
-  const [staffList, setStaffList] = useState(props.staffList);
-
-  const departmentList = useSelector((state) => state.department);
+function ModifyStaff(props) {
   const dispatch = useDispatch();
 
   // ----- Get value from modal form when click submit button -----
   function handleSubmit(value) {
     const newStaff = { ...value };
-
     newStaff.image = "/asset/images/alberto.png";
 
-    console.log(newStaff);
     postData(dispatch, newStaff);
   }
 
@@ -40,7 +33,7 @@ function AddStaffModal(props) {
   return (
     <Modal isOpen={props.isModalOpen} toggle={props.toggleModal}>
       <ModalHeader toggle={props.toggleModal} close={closeBtn}>
-        Thêm nhân viên
+        Chỉnh sửa thông tin
       </ModalHeader>
       <ModalBody>
         <LocalForm onSubmit={handleSubmit}>
@@ -50,20 +43,26 @@ function AddStaffModal(props) {
               Họ tên
             </Label>
             <Col md={7}>
-              <Control
+              <Control.select
                 model=".name"
                 id="name"
                 name="name"
                 className="form-control"
                 validators={{
-                  lenRange: (val) => val && val.length > 3,
+                  required: (val) => val,
                 }}
-              />
+              >
+                <option value="Finance">Finance</option>
+                <option value="HR">HR</option>
+                <option value="IT">IT</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Sale">Sale</option>
+              </Control.select>
               <Errors
                 model=".name"
                 className="text-danger"
                 messages={{
-                  lenRange: "Yêu cầu nhiều hơn 3 ký tự",
+                  required: "Yêu cầu bắt buộc",
                 }}
               />
             </Col>
@@ -220,9 +219,12 @@ function AddStaffModal(props) {
           </Row>
           {/* Submit button */}
           <Row className="form-group">
-            <Col className="col-7 offset-5">
-              <Button type="submit" color="primary">
-                Thêm
+            <Col className="col-7 offset-4">
+              <Button type="submit" color="info">
+                Chỉnh sửa
+              </Button>
+              <Button className="mx-1" type="submit" color="danger">
+                Xoá
               </Button>
             </Col>
           </Row>
@@ -232,4 +234,4 @@ function AddStaffModal(props) {
   );
 }
 
-export default AddStaffModal;
+export default ModifyStaff;

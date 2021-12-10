@@ -1,6 +1,6 @@
-import AddStaffModal from "./ModalStaffComponent";
+import AddNewStaff from "../features/AddNewStaff";
+import ModifyStaff from "../features/ModifyStaff";
 import StaffBreadcrumb from "./BreadcrumbComponent";
-import { Loading } from "../LoadingComponent";
 import { RenderStaff } from "../features/RenderStaff";
 
 import React, { useState } from "react";
@@ -27,7 +27,8 @@ function Staff(props) {
   const [staffList, setStaffList] = useState(props.staffList);
   const [searchList, setSearchList] = useState(props.staffList);
   const [currentDepartment, setCurrentDepartment] = useState("default");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddStaffOpen, setIsAddStaffOpen] = useState(false);
+  const [isModifyStaffOpen, setIsModifyStaffOpen] = useState(false);
 
   // ----- Update searchList when search box is blurred -----
   function handleBlur(e) {
@@ -72,9 +73,13 @@ function Staff(props) {
     setStaffList(filteredList);
   }
 
-  // This function will set true/false for isModalOpen flag
-  function toggleModal() {
-    setIsModalOpen(!isModalOpen);
+  // Toggle modal
+  function toggleAddStaff() {
+    setIsAddStaffOpen(!isAddStaffOpen);
+  }
+
+  function toggleModifyStaff() {
+    setIsModifyStaffOpen(!isModifyStaffOpen);
   }
 
   return (
@@ -83,16 +88,20 @@ function Staff(props) {
         {/* ----- Breadcrumb and Search Section ------ */}
         <StaffBreadcrumb
           match={props.match}
-          toggleModal={toggleModal}
+          toggleAddStaff={toggleAddStaff}
+          toggleModifyStaff={toggleModifyStaff}
           handleBlur={handleBlur}
           handleClick={handleClick}
         />
 
-        {/* ----- Modal form ----- */}
-        <AddStaffModal
-          staffList={staffList}
-          isModalOpen={isModalOpen}
-          toggleModal={toggleModal}
+        {/* ----- Add/Modify Staff Feature ----- */}
+        <AddNewStaff
+          isModalOpen={isAddStaffOpen}
+          toggleModal={toggleAddStaff}
+        />
+        <ModifyStaff
+          isModalOpen={isModifyStaffOpen}
+          toggleModal={toggleModifyStaff}
         />
 
         {/* ----- Filter form ----- */}
