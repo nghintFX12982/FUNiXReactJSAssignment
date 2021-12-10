@@ -47,42 +47,69 @@ const dispatchList = [
 ];
 
 export const fetchData = (dispatch, params) => {
-  return (
-    fetch(baseUrl + params)
-      .then(
-        (res) => {
-          if (res.ok) {
-            return res;
-          }
-
-          if (!res.ok) {
-            let err = new Error("Error " + res.status + ": " + res.statusText);
-            throw err;
-          }
-        },
-        (err) => {
-          let errmess = new Error(err.message);
-          throw errmess;
+  fetch(baseUrl + params)
+    .then(
+      (res) => {
+        if (res.ok) {
+          return res;
         }
-      )
-      .then((res) => res.json())
 
-      // Hanlde when get response successful
-      .then((list) => {
-        dispatchList.forEach((item) => {
-          if (item.params === params) dispatch(item.action(list));
-        });
-
-        if (params.indexOf("Dept") !== -1) {
-          dispatch(addDepartmentsStaff(list));
+        if (!res.ok) {
+          let err = new Error("Error " + res.status + ": " + res.statusText);
+          throw err;
         }
-      })
+      },
+      (err) => {
+        let errmess = new Error(err.message);
+        throw errmess;
+      }
+    )
+    .then((res) => res.json())
 
-      // Handle when get error
-      .catch((err) => {
-        dispatch(failDepartmentStaff(err.message));
-      })
-  );
+    // Hanlde when get response successful
+    .then((list) => {
+      dispatchList.forEach((item) => {
+        if (item.params === params) dispatch(item.action(list));
+      });
+
+      if (params.indexOf("Dept") !== -1) {
+        dispatch(addDepartmentsStaff(list));
+      }
+    })
+
+    // Handle when get error
+    .catch((err) => {
+      dispatch(failDepartmentStaff(err.message));
+    });
 };
 
 // ---------- Push data to baseUrl ----------
+export const postData = (dispatch, newStaff) => {
+  fetch(baseUrl + "staffs", {
+    method: "Post",
+    body: JSON.stringify(newStaff),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then(
+      (res) => {
+        if (res.ok) {
+          return res;
+        }
+
+        if (!res.ok) {
+          let err = new Error("Error " + res.status + ": " + res.statusText);
+          throw err;
+        }
+      },
+      (err) => {
+        let errmess = new Error(err.message);
+        throw errmess;
+      }
+    )
+    .then((res) => res.json())
+
+    // Hanlde when get response successful
+    .then((list) => {
+      dispatch(addStaff(list));
+    });
+};

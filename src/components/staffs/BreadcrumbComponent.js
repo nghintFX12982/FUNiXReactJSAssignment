@@ -22,9 +22,23 @@ function StaffBreadcrumb(props) {
 
           {/* Add button */}
           <div className="col-4 col-md-6 col-lg-8 left-align">
-            <Button color="danger" id="add-btn" onClick={props.toggleModal}>
-              Add
-            </Button>
+            <div className="row">
+              <div className="col-12 ">
+                <Button
+                  style={{ marginBottom: "8px" }}
+                  color="danger"
+                  id="add-btn"
+                  onClick={props.toggleModal}
+                >
+                  Thêm
+                </Button>
+              </div>
+              <div className="col-12 ">
+                <Button color="danger" id="add-btn" onClick={props.toggleModal}>
+                  Chỉnh sửa
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

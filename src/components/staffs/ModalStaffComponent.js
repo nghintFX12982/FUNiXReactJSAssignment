@@ -1,3 +1,5 @@
+import { postData } from "../../redux/ActionCreators";
+
 import React, { useState } from "react";
 import {
   Button,
@@ -7,6 +9,8 @@ import {
   Label,
   Row,
   Col,
+  TabContent,
+  TabPane,
 } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Control, LocalForm, Errors } from "react-redux-form";
@@ -17,30 +21,14 @@ function AddStaffModal(props) {
   const departmentList = useSelector((state) => state.department);
   const dispatch = useDispatch();
 
-  // This function will get value from modal form when click submit button
+  // ----- Get value from modal form when click submit button -----
   function handleSubmit(value) {
     const newStaff = { ...value };
 
-    newStaff.id = staffList.length;
-    newStaff.image = "/assets/images/alberto.png";
+    newStaff.image = "/asset/images/alberto.png";
 
     console.log(newStaff);
-
-    // departmentList.forEach((department, index) => {
-    //   if (department.name === newStaff.department) {
-    //     newStaff.department = department;
-    //   }
-    // });
-
-    // let localStaff = localStorage.getItem("newStaff")
-    //   ? JSON.parse(localStorage.getItem("newStaff"))
-    //   : [];
-
-    // localStaff.push(newStaff);
-    // localStorage.setItem("newStaff", JSON.stringify(localStaff));
-
-    // dispatch(addStaff(newStaff));
-    // dispatch(addDepartment(newStaff));
+    postData(dispatch, newStaff);
   }
 
   const closeBtn = (

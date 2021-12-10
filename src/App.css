@@ -64,7 +64,6 @@
 
 /* ---------- Breadcrumb ---------- */
 #breadcrumb-search-section {
-  border-bottom: 1px solid #ccc;
   border-radius: 0;
 }
 
@@ -113,6 +112,11 @@
 }
 
 @media only screen and (min-width: 768px) {
+  #breadcrumb-search-section {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+  }
+
   #add-btn {
     width: 100px;
   }
