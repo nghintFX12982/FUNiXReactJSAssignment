@@ -6,23 +6,16 @@ import { RenderStaff } from "../features/RenderStaff";
 import React, { useState } from "react";
 import { FormGroup, Input } from "reactstrap";
 
-// ------------------------------------
-// ----- Presentational Component -----
-const RenderFilterForm = () => {
-  return (
-    <React.Fragment>
-      <option value="default">(Bộ phận)</option>
-      <option value="Finance">Bộ phận Finance</option>
-      <option value="HR">Bộ phận HR</option>
-      <option value="IT">Bộ phận IT</option>
-      <option value="Marketing">Bộ phận Marketing</option>
-      <option value="Sale">Bộ phận Sale</option>
-    </React.Fragment>
-  );
-};
+const filterOption = [
+  { name: "(Bộ phận)", value: "default" },
+  { name: "Bộ phận Finance", value: "Finance" },
+  { name: "Bộ phận HR", value: "HR" },
+  { name: "Bộ phận IT", value: "IT" },
+  { name: "Bộ phận Marketing", value: "Marketing" },
+  { name: "Bộ phận Sale", value: "Sale" },
+];
 
-// -------------------------------
-// ----- Container Component -----
+// Main Component
 function Staff(props) {
   const [staffList, setStaffList] = useState(props.staffList);
   const [searchList, setSearchList] = useState(props.staffList);
@@ -30,14 +23,15 @@ function Staff(props) {
   const [isAddStaffOpen, setIsAddStaffOpen] = useState(false);
   const [isModifyStaffOpen, setIsModifyStaffOpen] = useState(false);
 
-  // ----- Update searchList when search box is blurred -----
+  // ---------- Search Feature ----------
+  // *** Update searchList when search box is blurred
   function handleBlur(e) {
     const searchValue = e.target.value;
 
     // Reset search list
     setSearchList(props.staffList);
 
-    // Create new search list & update to searchList
+    // Compare search value with each name in staff list
     if (searchValue !== "") {
       const list = props.staffList.filter((staff) => {
         const lowerName = staff.name.toLowerCase();
@@ -50,15 +44,14 @@ function Staff(props) {
     }
   }
 
-  // ----- Re-render list when click "find" button -----
+  // *** Re-render list when click "find" button
   function handleClick(e) {
-    console.log("click");
-    console.log(searchList);
     setCurrentDepartment("default");
     setStaffList(searchList);
   }
 
-  // This function will update filtered list & re-render when options are changed
+  // ---------- Filter Feature ----------
+  // *** Filtered list & re-render when options are changed
   function filterStaffList(e) {
     let filteredValue = e.target.value;
     let filteredList = [...props.staffList];
@@ -73,7 +66,8 @@ function Staff(props) {
     setStaffList(filteredList);
   }
 
-  // Toggle modal
+  // ---------- Toogle Feature ----------
+  // *** Toggle modal
   function toggleAddStaff() {
     setIsAddStaffOpen(!isAddStaffOpen);
   }
@@ -82,52 +76,53 @@ function Staff(props) {
     setIsModifyStaffOpen(!isModifyStaffOpen);
   }
 
+  // ---------- Render ----------
   return (
-    <React.Fragment>
-      <div className="container">
-        {/* ----- Breadcrumb and Search Section ------ */}
-        <StaffBreadcrumb
-          match={props.match}
-          toggleAddStaff={toggleAddStaff}
-          toggleModifyStaff={toggleModifyStaff}
-          handleBlur={handleBlur}
-          handleClick={handleClick}
-        />
+    <div className="container">
+      {/* *** Breadcrumb and Search Section */}
+      <StaffBreadcrumb
+        match={props.match}
+        toggleAddStaff={toggleAddStaff}
+        toggleModifyStaff={toggleModifyStaff}
+        handleBlur={handleBlur}
+        handleClick={handleClick}
+      />
 
-        {/* ----- Add/Modify Staff Feature ----- */}
-        <AddNewStaff
-          isModalOpen={isAddStaffOpen}
-          toggleModal={toggleAddStaff}
-        />
-        <ModifyStaff
-          isModalOpen={isModifyStaffOpen}
-          toggleModal={toggleModifyStaff}
-        />
+      {/* *** Add/Modify Staff Feature */}
+      <AddNewStaff
+        isModalOpen={isAddStaffOpen}
+        toggleModal={toggleAddStaff}
+        departments={props.departments}
+      />
+      <ModifyStaff
+        isModalOpen={isModifyStaffOpen}
+        toggleModal={toggleModifyStaff}
+        staffList={staffList}
+        departments={props.departments}
+        match={props.match}
+      />
 
-        {/* ----- Filter form ----- */}
-        <div className="row">
-          <div className="col-12 col-md-4">
-            <FormGroup>
-              <Input
-                type="select"
-                id="mySelect"
-                value={currentDepartment}
-                onChange={filterStaffList}
-              >
-                <RenderFilterForm />
-              </Input>
-            </FormGroup>
-          </div>
+      {/* *** Filter form */}
+      <div className="row">
+        <div className="col-12 col-md-4">
+          <FormGroup>
+            <Input
+              type="select"
+              id="mySelect"
+              value={currentDepartment}
+              onChange={filterStaffList}
+            >
+              {filterOption.map((option) => (
+                <option value={option.value}>{option.name}</option>
+              ))}
+            </Input>
+          </FormGroup>
         </div>
-
-        {/* Staff Render Section */}
-        <RenderStaff
-          staffList={staffList}
-          match={props.match}
-          isLoading={props.isLoading}
-        />
       </div>
-    </React.Fragment>
+
+      {/* *** Staff Render Section */}
+      <RenderStaff staffList={staffList} match={props.match} />
+    </div>
   );
 }
 

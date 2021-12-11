@@ -31,9 +31,8 @@ function Department(props) {
     });
   }, []);
 
-  // --- Renders staff of each department
+  // ---------- Renders staff of each department ----------
   if (props.match.params.deptId) {
-    console.log(departmentStaff.departmentstaffs);
     return (
       <div className="container">
         <RenderStaff
@@ -46,14 +45,14 @@ function Department(props) {
     );
   }
 
-  // --- Render all departments
+  // ---------- Render all departments ----------
   if (!props.match.params.deptId) {
-    // Loading case
+    // *** Loading case
     if (props.departments.isLoading) {
       return <Loading />;
     }
 
-    // Success case
+    // *** Success case
     if (!props.departments.isLoading) {
       return (
         <div className="container">

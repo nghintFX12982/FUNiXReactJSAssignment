@@ -86,12 +86,45 @@ export const fetchData = (dispatch, params) => {
 // ---------- Push data to baseUrl ----------
 export const postData = (dispatch, newStaff) => {
   fetch(baseUrl + "staffs", {
-    method: "Post",
+    method: "POST",
     body: JSON.stringify(newStaff),
     headers: { "Content-Type": "application/json" },
   })
     .then(
       (res) => {
+        if (res.ok) {
+          return res;
+        }
+
+        if (!res.ok) {
+          let err = new Error("Error " + res.status + ": " + res.statusText);
+          throw err;
+        }
+      },
+      (err) => {
+        let errmess = new Error(err.message);
+        throw errmess;
+      }
+    )
+    .then((res) => res.json())
+
+    // Hanlde when get response successful
+    .then((list) => {
+      dispatch(addStaff(list));
+    });
+};
+
+// ---------- Modify data to baseUrl ----------
+export const modifyData = (dispatch, modifiedData) => {
+  console.log(modifiedData);
+  fetch(baseUrl + "staffs", {
+    method: "PATCH",
+    body: JSON.stringify(modifiedData),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then(
+      (res) => {
+        console.log(res);
         if (res.ok) {
           return res;
         }

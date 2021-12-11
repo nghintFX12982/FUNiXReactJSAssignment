@@ -19,6 +19,10 @@ function AddNewStaff(props) {
   // ----- Get value from modal form when click submit button -----
   function handleSubmit(value) {
     const newStaff = { ...value };
+
+    newStaff.salaryScale = Number(newStaff.salaryScale);
+    newStaff.annualLeave = Number(newStaff.annualLeave);
+    newStaff.overTime = Number(newStaff.overTime);
     newStaff.image = "/asset/images/alberto.png";
 
     postData(dispatch, newStaff);
@@ -61,6 +65,7 @@ function AddNewStaff(props) {
               />
             </Col>
           </Row>
+
           {/* Date of birth*/}
           <Row className="form-group">
             <Label htmlFor="doB" md={5}>
@@ -86,6 +91,7 @@ function AddNewStaff(props) {
               />
             </Col>
           </Row>
+
           {/* Started Date*/}
           <Row className="form-group">
             <Label htmlFor="startDate" md={5}>
@@ -111,6 +117,7 @@ function AddNewStaff(props) {
               />
             </Col>
           </Row>
+
           {/* Department */}
           <Row className="form-group">
             <Label htmlFor="department" md={5}>
@@ -118,21 +125,22 @@ function AddNewStaff(props) {
             </Label>
             <Col md={7}>
               <Control.select
-                model=".department"
+                model=".departmentId"
                 id="department"
                 name="department"
                 className="form-control"
-                defaultValue="Finance"
+                defaultValue="Dept01"
               >
-                <option value="Finance">Finance</option>
-                <option value="HR">HR</option>
-                <option value="IT">IT</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Sale">Sale</option>
+                {props.departments.map((department) => {
+                  return (
+                    <option value={department.id}>{department.name}</option>
+                  );
+                })}
               </Control.select>
               <Errors model=".department" />
             </Col>
           </Row>
+
           {/* Salary Scale */}
           <Row className="form-group">
             <Label htmlFor="salaryScale" md={5}>
@@ -161,6 +169,7 @@ function AddNewStaff(props) {
               />
             </Col>
           </Row>
+
           {/* Annual Leave */}
           <Row className="form-group">
             <Label htmlFor="annualLeave" md={5}>
@@ -186,6 +195,7 @@ function AddNewStaff(props) {
               />
             </Col>
           </Row>
+
           {/* Overtime */}
           <Row className="form-group">
             <Label htmlFor="overTime" md={5}>
@@ -211,6 +221,7 @@ function AddNewStaff(props) {
               />
             </Col>
           </Row>
+
           {/* Submit button */}
           <Row className="form-group">
             <Col className="col-7 offset-5">

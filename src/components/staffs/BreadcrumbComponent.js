@@ -2,13 +2,14 @@ import React from "react";
 import { Breadcrumb, BreadcrumbItem, Button, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 
+// Main Component
 function StaffBreadcrumb(props) {
   return (
     <div className="row" id="breadcrumb-search-section">
       <div className="col-12 col-md-6" id="breadcrumb">
-        {/* ----- Add Button Section ----- */}
+        {/* ---------- Add Button Section ---------- */}
         <div className="row">
-          {/* Breadcrumb */}
+          {/* *** Breadcrumb */}
           <div className="col-8 col-md-6 col-lg-4">
             <Breadcrumb tag="nav" listTag="div">
               <BreadcrumbItem>
@@ -20,7 +21,7 @@ function StaffBreadcrumb(props) {
             </Breadcrumb>
           </div>
 
-          {/* Add button */}
+          {/* *** Add & Modify button */}
           <div className="col-4 col-md-6 col-lg-8 left-align">
             <div className="row">
               <div className="col-12 ">
@@ -47,10 +48,10 @@ function StaffBreadcrumb(props) {
         </div>
       </div>
 
-      {/* ----- Search Section ----- */}
+      {/* ---------- Search Section ---------- */}
       <div className="col-12 col-md-6" id="staff-search">
         <div className="row my-2">
-          {/* Search Box */}
+          {/* *** Search Box */}
           <div className="col-8">
             <Input
               type="text"
@@ -60,7 +61,7 @@ function StaffBreadcrumb(props) {
             />
           </div>
 
-          {/* Search Button */}
+          {/* *** Search Button */}
           <div className="col-4">
             <Button
               color="primary"

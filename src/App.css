@@ -103,6 +103,10 @@
   border: 1px solid #e5e7eb;
   color: #444;
 }
+/* ---------- Modal ---------- */
+[id*="old-"] {
+  background-color: #eee;
+}
 
 /* ---------- Footer ---------- */
 #footer .jumbotron {
