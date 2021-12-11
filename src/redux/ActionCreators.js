@@ -124,7 +124,6 @@ export const modifyData = (dispatch, modifiedData) => {
   })
     .then(
       (res) => {
-        console.log(res);
         if (res.ok) {
           return res;
         }
@@ -142,6 +141,18 @@ export const modifyData = (dispatch, modifiedData) => {
     .then((res) => res.json())
 
     // Hanlde when get response successful
+    .then((list) => {
+      dispatch(addStaff(list));
+    });
+};
+
+// ---------- Delete data to baseUrl ----------
+export const deleteData = (dispatch, staffId) => {
+  fetch(baseUrl + "staffs/" + staffId, {
+    method: "DELETE",
+    header: { "Content-Type": "application/json" },
+  })
+    .then((res) => res.json())
     .then((list) => {
       dispatch(addStaff(list));
     });

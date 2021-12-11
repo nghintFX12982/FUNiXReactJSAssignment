@@ -1,4 +1,4 @@
-import { modifyData } from "../../redux/ActionCreators";
+import { modifyData, deleteData } from "../../redux/ActionCreators";
 
 import React, { useState } from "react";
 import {
@@ -29,7 +29,6 @@ function ModifyStaff(props) {
   let btnType = "";
 
   // ---------- Handle click & submit buttom ----------
-  // *** What kind of button to click?
   function handleOnChange(e) {
     setSelectedStaff({
       id: props.staffList[e.target.value].id,
@@ -43,6 +42,7 @@ function ModifyStaff(props) {
     });
   }
 
+  // *** Click what button?
   function handleClick(e) {
     btnType = e.target.value;
   }
@@ -51,14 +51,18 @@ function ModifyStaff(props) {
   function handleSubmit(value) {
     const newStaff = { ...value };
 
-    newStaff.id = newStaff.id ? Number(newStaff.id) : selectedStaff.id;
+    // Convert newStaff.id from index number from right id
+    newStaff.id = props.staffList[newStaff.id].id;
 
     if (btnType === "modify") {
+      btnType = "";
       modifyData(dispatch, newStaff);
-      console.log(newStaff);
     }
 
-    // postData(dispatch, newStaff);
+    if (btnType === "delete") {
+      btnType = "";
+      deleteData(dispatch, newStaff.id);
+    }
   }
 
   // ---------- Modal's close button ----------
@@ -90,8 +94,9 @@ function ModifyStaff(props) {
                 className="form-control"
                 onChange={handleOnChange}
               >
-                {props.staffList.map((staff) => {
-                  return <option value={staff.id}>{staff.name}</option>;
+                {/* Value is position of staff in staffList */}
+                {props.staffList.map((staff, staffIndex) => {
+                  return <option value={staffIndex}>{staff.name}</option>;
                 })}
               </Control.select>
               <Errors model=".name" className="text-danger" />
