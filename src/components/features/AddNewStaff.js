@@ -133,7 +133,9 @@ function AddNewStaff(props) {
               >
                 {props.departments.map((department) => {
                   return (
-                    <option value={department.id}>{department.name}</option>
+                    <option key={department.id} value={department.id}>
+                      {department.name}
+                    </option>
                   );
                 })}
               </Control.select>

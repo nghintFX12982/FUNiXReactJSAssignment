@@ -17,7 +17,6 @@ export const RenderSalary = (props) => {
 
   // Success case
   if (!props.isLoading) {
-    console.log(props.staffList);
     return (
       <div className="row">
         {props.staffList.map((staff) => (

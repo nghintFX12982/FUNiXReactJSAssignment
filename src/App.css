@@ -67,8 +67,8 @@
   border-radius: 0;
 }
 
-#breadcrumb-search-section h3 {
-  margin-bottom: 0;
+#breadcrumb h3 {
+  font-size: 200%;
 }
 
 #breadcrumb {
@@ -82,6 +82,10 @@
 }
 
 #add-btn,
+#modify-btn {
+  width: 100%;
+}
+
 #staff-search-btn {
   width: 100%;
 }
@@ -121,11 +125,26 @@
     padding-bottom: 8px;
   }
 
-  #add-btn {
-    width: 100px;
+  #add-btn,
+  #modify-btn {
+    width: 58px;
   }
 
   .left-align {
     text-align: left;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  #add-btn,
+  #modify-btn {
+    width: 90px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #add-btn,
+  #modify-btn {
+    width: 105px;
   }
 }

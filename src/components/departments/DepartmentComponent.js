@@ -2,7 +2,7 @@ import { fetchData } from "../../redux/ActionCreators";
 import { RenderStaff } from "../features/RenderStaff";
 import { Loading } from "../LoadingComponent";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Jumbotron } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

@@ -6,15 +6,6 @@ import { RenderStaff } from "../features/RenderStaff";
 import React, { useState } from "react";
 import { FormGroup, Input } from "reactstrap";
 
-const filterOption = [
-  { name: "(Bộ phận)", value: "default" },
-  { name: "Bộ phận Finance", value: "Finance" },
-  { name: "Bộ phận HR", value: "HR" },
-  { name: "Bộ phận IT", value: "IT" },
-  { name: "Bộ phận Marketing", value: "Marketing" },
-  { name: "Bộ phận Sale", value: "Sale" },
-];
-
 // Main Component
 function Staff(props) {
   const [staffList, setStaffList] = useState(props.staffList);
@@ -52,17 +43,17 @@ function Staff(props) {
 
   // ---------- Filter Feature ----------
   // *** Filtered list & re-render when options are changed
-  function filterStaffList(e) {
-    let filteredValue = e.target.value;
+  function handleOnChange(e) {
+    let deptIdFilter = e.target.value;
     let filteredList = [...props.staffList];
 
-    if (filteredValue !== "default") {
+    if (deptIdFilter !== "default") {
       filteredList = props.staffList.filter(
-        (staff) => staff.department.name === filteredValue
+        (staff) => staff.departmentId === deptIdFilter
       );
     }
 
-    setCurrentDepartment(filteredValue);
+    setCurrentDepartment(deptIdFilter);
     setStaffList(filteredList);
   }
 
@@ -110,10 +101,13 @@ function Staff(props) {
               type="select"
               id="mySelect"
               value={currentDepartment}
-              onChange={filterStaffList}
+              onChange={handleOnChange}
             >
-              {filterOption.map((option) => (
-                <option value={option.value}>{option.name}</option>
+              <option value="default">(Mặc định)</option>
+              {props.departments.map((department) => (
+                <option key={department.id} value={department.id}>
+                  {department.name}
+                </option>
               ))}
             </Input>
           </FormGroup>

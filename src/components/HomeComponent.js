@@ -31,7 +31,6 @@ const Home = (props) => {
       return (
         <Staff
           staffList={props.staffs.staffs}
-          // isLoading={props.staffs.isLoading}
           departments={props.departments.departments}
           match={props.match}
         />

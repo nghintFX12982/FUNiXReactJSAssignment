@@ -96,7 +96,11 @@ function ModifyStaff(props) {
               >
                 {/* Value is position of staff in staffList */}
                 {props.staffList.map((staff, staffIndex) => {
-                  return <option value={staffIndex}>{staff.name}</option>;
+                  return (
+                    <option key={staffIndex} value={staffIndex}>
+                      {staff.name}
+                    </option>
+                  );
                 })}
               </Control.select>
               <Errors model=".name" className="text-danger" />
@@ -182,7 +186,9 @@ function ModifyStaff(props) {
                 {props.departments.map((department) => {
                   if (department.id === selectedStaff.departmentId) {
                     return (
-                      <option value={department.id}>{department.name}</option>
+                      <option key={department.id} value={department.id}>
+                        {department.name}
+                      </option>
                     );
                   }
                 })}
@@ -199,7 +205,9 @@ function ModifyStaff(props) {
                 <option value="default">(Mặc định)</option>
                 {props.departments.map((department) => {
                   return (
-                    <option value={department.id}>{department.name}</option>
+                    <option key={department.id} value={department.id}>
+                      {department.name}
+                    </option>
                   );
                 })}
               </Control.select>

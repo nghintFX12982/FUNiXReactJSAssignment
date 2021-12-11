@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, Card, CardImg, List } from "reactstrap";
 import dateFormat from "dateformat";
-import { Loading } from "../LoadingComponent";
 
 // ---------- Presentational Component ----------
 // *** BreadCrumb Section

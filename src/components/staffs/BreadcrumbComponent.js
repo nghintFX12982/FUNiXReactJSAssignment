@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 function StaffBreadcrumb(props) {
   return (
     <div className="row" id="breadcrumb-search-section">
-      <div className="col-12 col-md-6" id="breadcrumb">
-        {/* ---------- Add Button Section ---------- */}
+      <div className="col-12 col-md-7" id="breadcrumb">
+        {/* ---------- Button Section ---------- */}
         <div className="row">
           {/* *** Breadcrumb */}
-          <div className="col-8 col-md-6 col-lg-4">
+          <div className="col-8 col-md-5 col-lg-4">
             <Breadcrumb tag="nav" listTag="div">
               <BreadcrumbItem>
                 <Link to={props.match.path}>
@@ -22,25 +22,25 @@ function StaffBreadcrumb(props) {
           </div>
 
           {/* *** Add & Modify button */}
-          <div className="col-4 col-md-6 col-lg-8 left-align">
+          <div className="col-4 col-md-7 col-lg-8 left-align">
             <div className="row">
-              <div className="col-12 ">
+              <div className="col-12 col-md-3">
                 <Button
                   style={{ marginBottom: "8px" }}
                   color="danger"
                   id="add-btn"
                   onClick={props.toggleAddStaff}
                 >
-                  Thêm
+                  <i class="fa fa-plus" aria-hidden="true"></i>
                 </Button>
               </div>
-              <div className="col-12 ">
+              <div className="col-12 col-md-3">
                 <Button
                   color="danger"
-                  id="add-btn"
+                  id="modify-btn"
                   onClick={props.toggleModifyStaff}
                 >
-                  Chỉnh sửa
+                  <i class="fa fa-edit"></i>
                 </Button>
               </div>
             </div>
@@ -49,7 +49,7 @@ function StaffBreadcrumb(props) {
       </div>
 
       {/* ---------- Search Section ---------- */}
-      <div className="col-12 col-md-6" id="staff-search">
+      <div className="col-12 col-md-5" id="staff-search">
         <div className="row my-2">
           {/* *** Search Box */}
           <div className="col-8">
