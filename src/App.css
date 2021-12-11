@@ -69,6 +69,7 @@
 
 #breadcrumb h3 {
   font-size: 200%;
+  color: #282c34;
 }
 
 #breadcrumb {
@@ -79,6 +80,10 @@
   background-color: #fff;
   margin: 0;
   padding: 0;
+}
+
+#modify-btn-wrapper {
+  margin-left: -5px;
 }
 
 #add-btn,
@@ -120,9 +125,17 @@
 }
 
 @media only screen and (min-width: 768px) {
+  #breadcrumb h3 {
+    font-size: 150%;
+  }
+
   #breadcrumb-search-section {
     border-bottom: 1px solid #ccc;
     padding-bottom: 8px;
+  }
+
+  #modify-btn-wrapper {
+    margin-left: 0;
   }
 
   #add-btn,

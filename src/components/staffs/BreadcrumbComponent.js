@@ -11,11 +11,13 @@ function StaffBreadcrumb(props) {
         <div className="row">
           {/* *** Breadcrumb */}
           <div className="col-8 col-md-5 col-lg-4">
-            <Breadcrumb tag="nav" listTag="div">
+            <Breadcrumb tag="nav" listTag="div" style={{ paddingTop: "5px" }}>
               <BreadcrumbItem>
                 <Link to={props.match.path}>
                   {" "}
-                  <h3 style={{ display: "inline-block" }}>Nhân viên</h3>
+                  <h3 style={{ display: "inline-block" }}>
+                    <i class="fa fa-user" aria-hidden="true"></i> Nhân viên
+                  </h3>
                 </Link>
               </BreadcrumbItem>
             </Breadcrumb>
@@ -24,7 +26,11 @@ function StaffBreadcrumb(props) {
           {/* *** Add & Modify button */}
           <div className="col-4 col-md-7 col-lg-8 left-align">
             <div className="row">
-              <div className="col-12 col-md-3">
+              {/* Add button */}
+              <div
+                className="col-6 col-md-3"
+                style={{ paddingLeft: 0, paddingRight: "10px" }}
+              >
                 <Button
                   style={{ marginBottom: "8px" }}
                   color="danger"
@@ -34,7 +40,15 @@ function StaffBreadcrumb(props) {
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </Button>
               </div>
-              <div className="col-12 col-md-3">
+              {/* Modify button */}
+              <div
+                id="modify-btn-wrapper"
+                className="col-6 col-md-3"
+                style={{
+                  paddingLeft: 0,
+                  paddingRight: "10px",
+                }}
+              >
                 <Button
                   color="danger"
                   id="modify-btn"
@@ -62,7 +76,7 @@ function StaffBreadcrumb(props) {
           </div>
 
           {/* *** Search Button */}
-          <div className="col-4">
+          <div className="col-4" style={{ paddingLeft: 0 }}>
             <Button
               color="primary"
               size="md"
