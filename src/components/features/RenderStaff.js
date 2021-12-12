@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 export const RenderStaff = (props) => {
   // Error case
   if (props.errmess) {
-    console.log("error");
     return <h4 style={{ marginTop: "40px" }}>{props.errmess}</h4>;
   }
 

@@ -15,7 +15,8 @@ import { Control, LocalForm, Errors } from "react-redux-form";
 import dateFormat from "dateformat";
 
 function ModifyStaff(props) {
-  let [selectedStaff, setSelectedStaff] = useState({
+  const dispatch = useDispatch();
+  const [selectedStaff, setSelectedStaff] = useState({
     id: props.staffList[0].id,
     name: props.staffList[0].name,
     doB: props.staffList[0].doB,
@@ -25,10 +26,11 @@ function ModifyStaff(props) {
     annualLeave: props.staffList[0].annualLeave,
     overTime: props.staffList[0].overTime,
   });
-  const dispatch = useDispatch();
+
   let btnType = "";
 
   // ---------- Handle click & submit buttom ----------
+  // *** Default value of selected staff
   function handleOnChange(e) {
     setSelectedStaff({
       id: props.staffList[e.target.value].id,
@@ -197,18 +199,21 @@ function ModifyStaff(props) {
             {/* New department */}
             <Col md={4}>
               <Control.select
-                model=".department"
+                model=".departmentId"
                 id="department"
                 name="department"
                 className="form-control"
               >
                 <option value="default">(Mặc định)</option>
+                {/* Show department options except default one */}
                 {props.departments.map((department) => {
-                  return (
-                    <option key={department.id} value={department.id}>
-                      {department.name}
-                    </option>
-                  );
+                  if (department.id !== selectedStaff.departmentId) {
+                    return (
+                      <option key={department.id} value={department.id}>
+                        {department.name}
+                      </option>
+                    );
+                  }
                 })}
               </Control.select>
             </Col>

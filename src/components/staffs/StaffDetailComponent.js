@@ -41,7 +41,7 @@ const RenderDetail = ({ staff, departments }) => {
       })}
       <li>
         <strong>Lương:</strong>{" "}
-        {formatDecimal(staff.salary, {
+        {formatDecimal(staff.salary || 0, {
           thousands: ",",
           decimal: ".",
           precision: 0,

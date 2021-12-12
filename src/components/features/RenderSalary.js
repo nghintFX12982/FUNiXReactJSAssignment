@@ -30,7 +30,7 @@ export const RenderSalary = (props) => {
               <Card className="p-1">
                 <CardText>
                   Lương:{" "}
-                  {formatDecimal(staff.salary, {
+                  {formatDecimal(staff.salary || 0, {
                     decimal: ".",
                     thousands: ",",
                     precision: 0,

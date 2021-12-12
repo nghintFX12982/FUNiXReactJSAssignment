@@ -31,7 +31,7 @@ function Staff(props) {
         return lowerName.indexOf(lowerValue) !== -1;
       });
 
-      setSearchList(list);
+      if (list.length > 0) setSearchList(list);
     }
   }
 
