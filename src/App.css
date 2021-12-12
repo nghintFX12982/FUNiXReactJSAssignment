@@ -76,7 +76,7 @@
   padding-top: 7px;
 }
 
-.breadcrumb {
+#breadcrumb .breadcrumb {
   background-color: #fff;
   margin: 0;
   padding: 0;
@@ -113,7 +113,7 @@
   color: #444;
 }
 /* ---------- Modal ---------- */
-[id*="old-"] {
+[id*="old-"].form-control {
   background-color: #eee;
 }
 
@@ -124,9 +124,14 @@
   margin: 32px 0 0 0;
 }
 
+/* ---------- Media ---------- */
 @media only screen and (min-width: 768px) {
   #breadcrumb h3 {
     font-size: 150%;
+  }
+
+  #breadcrumb .breadcrumb {
+    padding-top: 5px;
   }
 
   #breadcrumb-search-section {
@@ -160,4 +165,27 @@
   #modify-btn {
     width: 105px;
   }
+}
+
+/* ---------- Transition ---------- */
+.page-enter {
+  opacity: 0.2.3;
+  transform: translateX(-100%);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms ease;
+}
+
+.page-exit {
+  opacity: 0.7;
+  transform: translateX(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 500ms ease;
 }

@@ -1,21 +1,10 @@
+import { RenderBreadcrumb } from "../features/RenderBreadcrumb";
+
 import React from "react";
-import { Link } from "react-router-dom";
-import { Breadcrumb, BreadcrumbItem, Card, CardImg, List } from "reactstrap";
+import { Card, CardImg, List } from "reactstrap";
 import dateFormat from "dateformat";
 
 // ---------- Presentational Component ----------
-// *** BreadCrumb Section
-const RenderBreadcrumb = ({ staff }) => {
-  return (
-    <Breadcrumb tag="nav" listTag="div">
-      <BreadcrumbItem>
-        <Link to="/staff">Nhân Viên</Link>
-      </BreadcrumbItem>
-      <BreadcrumbItem>{staff.name}</BreadcrumbItem>
-    </Breadcrumb>
-  );
-};
-
 // *** Left column: Image section
 const RenderImage = ({ staff }) => {
   return (
@@ -27,18 +16,43 @@ const RenderImage = ({ staff }) => {
 
 // *** Right column: Detail Section
 const RenderDetail = ({ staff, departments }) => {
+  const formatDecimal = require("format-decimal");
+
   return (
     <List type="unstyled" style={{ textAlign: "left" }}>
-      <li>Họ và tên: {staff.name}</li>
-      <li>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</li>
-      <li>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</li>
+      <li>
+        <strong>Họ và tên:</strong> {staff.name}
+      </li>
+      <li>
+        <strong>Ngày sinh:</strong> {dateFormat(staff.doB, "dd/mm/yyyy")}
+      </li>
+      <li>
+        <strong>Ngày vào công ty:</strong>{" "}
+        {dateFormat(staff.startDate, "dd/mm/yyyy")}
+      </li>
       {departments.map((department) => {
         if (department.id === staff.departmentId) {
-          return <li>Phòng ban: {department.name}</li>;
+          return (
+            <li>
+              <strong>Phòng ban:</strong> {department.name}
+            </li>
+          );
         }
       })}
-      <li>Số ngày nghỉ còn lại: {staff.annualLeave}</li>
-      <li>Số ngày đã làm thêm: {staff.overTime}</li>
+      <li>
+        <strong>Lương:</strong>{" "}
+        {formatDecimal(staff.salary, {
+          thousands: ",",
+          decimal: ".",
+          precision: 0,
+        })}
+      </li>
+      <li>
+        <strong>Số ngày nghỉ còn lại:</strong> {staff.annualLeave}
+      </li>
+      <li>
+        <strong>Số ngày đã làm thêm:</strong> {staff.overTime}
+      </li>
     </List>
   );
 };
@@ -48,14 +62,10 @@ function StaffDetail({ staff, departments }) {
   return (
     <div className="container">
       {/* *** Breadcrumb Section */}
-      <div className="row">
-        <div className="col-12">
-          <RenderBreadcrumb staff={staff} />
-        </div>
-      </div>
+      <RenderBreadcrumb staffName={staff.name} />
 
       {/* *** Image & Info Section */}
-      <div className="row">
+      <div className="row" style={{ marginBottom: "100px" }}>
         <div className="col-12 col-md-4 col-xl-3">
           <RenderImage staff={staff} />
         </div>

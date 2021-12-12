@@ -2,9 +2,10 @@ import { Loading } from "../LoadingComponent";
 
 import React from "react";
 import { Card, CardText, Jumbotron } from "reactstrap";
-const formatDecimal = require("format-decimal");
 
 export const RenderSalary = (props) => {
+  const formatDecimal = require("format-decimal");
+
   // Error case
   if (props.errmess) {
     return <h4 style={{ marginTop: "40px" }}>{props.errmess}</h4>;

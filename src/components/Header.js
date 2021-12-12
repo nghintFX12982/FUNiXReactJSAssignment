@@ -26,9 +26,11 @@ const Header = (props) => {
               toggle();
             }
           }}
+          onToggle={() => console.log("nghi")}
           navbar
         >
           <Nav className="mr-auto" navbar>
+            {/* Staff path */}
             <NavItem>
               <RouterLink to="/staff">
                 <NavLink>
@@ -36,6 +38,8 @@ const Header = (props) => {
                 </NavLink>
               </RouterLink>
             </NavItem>
+
+            {/* Department path */}
             <NavItem>
               <RouterLink to="/department">
                 <NavLink>
@@ -43,6 +47,8 @@ const Header = (props) => {
                 </NavLink>
               </RouterLink>
             </NavItem>
+
+            {/* Salary path */}
             <NavItem>
               <RouterLink to="/salary">
                 <NavLink>
@@ -52,6 +58,7 @@ const Header = (props) => {
             </NavItem>
           </Nav>
         </Collapse>
+
         <RouterLink to="/staff">
           <NavbarText>Thông Tin Nhân Viên</NavbarText>
         </RouterLink>

@@ -11,7 +11,7 @@ function StaffBreadcrumb(props) {
         <div className="row">
           {/* *** Breadcrumb */}
           <div className="col-8 col-md-5 col-lg-4">
-            <Breadcrumb tag="nav" listTag="div" style={{ paddingTop: "5px" }}>
+            <Breadcrumb tag="nav" listTag="div">
               <BreadcrumbItem>
                 <Link to={props.match.path}>
                   {" "}
