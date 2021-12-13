@@ -63,6 +63,7 @@ function ModifyStaff(props) {
 
     if (btnType === "delete") {
       btnType = "";
+
       deleteData(dispatch, newStaff.id);
     }
   }

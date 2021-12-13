@@ -44,7 +44,7 @@ function App() {
 
       {/* ----- Router Section ----- */}
       <TransitionGroup>
-        <CSSTransition key={location.key} timeout={500} classNames="page">
+        <CSSTransition key={location.key} timeout={300} classNames="page">
           <Switch>
             {/* Route for each path */}
             {routes.map(({ path, Component }) => {
