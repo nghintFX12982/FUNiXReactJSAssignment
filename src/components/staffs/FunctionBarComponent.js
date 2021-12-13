@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Button, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 
 // Main Component
-function StaffBreadcrumb(props) {
+function FunctionBar(props) {
   return (
     <div className="row" id="breadcrumb-search-section">
       <div className="col-12 col-md-7" id="breadcrumb">
@@ -92,4 +92,4 @@ function StaffBreadcrumb(props) {
   );
 }
 
-export default StaffBreadcrumb;
+export default FunctionBar;

@@ -1,6 +1,6 @@
 import AddNewStaff from "../features/AddNewStaff";
 import ModifyStaff from "../features/ModifyStaff";
-import StaffBreadcrumb from "./BreadcrumbComponent";
+import FunctionBar from "./FunctionBarComponent";
 import { RenderStaff } from "../features/RenderStaff";
 
 import React, { useState } from "react";
@@ -71,7 +71,7 @@ function Staff(props) {
   return (
     <div className="container">
       {/* *** Breadcrumb and Search Section */}
-      <StaffBreadcrumb
+      <FunctionBar
         match={props.match}
         toggleAddStaff={toggleAddStaff}
         toggleModifyStaff={toggleModifyStaff}
