@@ -33,7 +33,7 @@ const RenderDetail = ({ staff, departments }) => {
       {departments.map((department) => {
         if (department.id === staff.departmentId) {
           return (
-            <li>
+            <li key={department.id}>
               <strong>Phòng ban:</strong> {department.name}
             </li>
           );
