@@ -315,7 +315,7 @@ function ModifyStaff(props) {
 
             {/* *** Submit button */}
             <Row className="form-group">
-              <Col className="col-8 offset-2">
+              <Col className="col-10 offset-1">
                 {/* Modify button */}
                 <Button
                   type="submit"
