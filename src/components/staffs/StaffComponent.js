@@ -1,5 +1,4 @@
 import AddNewStaff from "../features/AddNewStaff";
-import ModifyStaff from "../features/ModifyStaff";
 import FunctionBar from "./FunctionBarComponent";
 import { RenderStaff } from "../features/RenderStaff";
 
@@ -84,13 +83,6 @@ function Staff(props) {
         isModalOpen={isAddStaffOpen}
         toggleModal={toggleAddStaff}
         departments={props.departments}
-      />
-      <ModifyStaff
-        isModalOpen={isModifyStaffOpen}
-        toggleModal={toggleModifyStaff}
-        staffList={staffList}
-        departments={props.departments}
-        match={props.match}
       />
 
       {/* *** Filter form */}

@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./components/HomeComponent";
 import Department from "./components/departments/DepartmentComponent";
 import Salary from "./components/salary/SalaryComponent";
+import Info from "./components/modify/InfoComponent";
 
 import React, { useEffect } from "react";
 import { useLocation } from "react-router";
@@ -26,14 +27,15 @@ function App() {
     { name: "DeptPage", path: "/department", Component: Department },
     { name: "DeptStaff", path: "/department/:deptId", Component: Department },
     { name: "SalaryPage", path: "/salary", Component: Salary },
+    { name: "EditPage", path: "/edit", Component: Info },
   ];
 
   // Fetch data after render
   useEffect(() => {
     dispatch((dispatch) => {
-      fetchData(dispatch, "staffs");
-      fetchData(dispatch, "departments");
-      fetchData(dispatch, "staffsSalary");
+      dispatch(fetchData("staffs"));
+      dispatch(fetchData("departments"));
+      dispatch(fetchData("staffsSalary"));
     });
   }, []);
 

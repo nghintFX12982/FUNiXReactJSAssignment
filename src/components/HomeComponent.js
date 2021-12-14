@@ -10,6 +10,7 @@ const Home = (props) => {
   if (props.staffs.isLoading) {
     return <Loading />;
   }
+
   // Render each staff
   if (!props.staffs.isLoading) {
     if (props.match.params.staffid) {

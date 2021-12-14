@@ -11,7 +11,9 @@ export const RenderBreadcrumb = (props) => {
       <div className="col-12">
         <Breadcrumb tag="nav" listTag="div">
           <BreadcrumbItem>
-            <Link to="/staff">{breadcrumbName}</Link>
+            <Link to={props.staffName ? "/staff" : "/department"}>
+              {breadcrumbName}
+            </Link>
           </BreadcrumbItem>
           <BreadcrumbItem>{props.staffName || props.deptName}</BreadcrumbItem>
         </Breadcrumb>

@@ -56,6 +56,16 @@ const Header = (props) => {
                 </NavLink>
               </RouterLink>
             </NavItem>
+
+            {/* Modify path */}
+            <NavItem>
+              <RouterLink to="/edit">
+                <NavLink>
+                  <i class="fa fa-edit" aria-hidden="true"></i> Thay Đổi Thông
+                  Tin
+                </NavLink>
+              </RouterLink>
+            </NavItem>
           </Nav>
         </Collapse>
 

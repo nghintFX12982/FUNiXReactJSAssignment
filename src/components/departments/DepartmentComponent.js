@@ -20,7 +20,7 @@ function Department(props) {
 
   useEffect(() => {
     dispatch((dispatch) => {
-      fetchData(dispatch, `departments/${props.match.params.deptId}`);
+      dispatch(fetchData(`departments/${props.match.params.deptId}`));
     });
   }, []);
 

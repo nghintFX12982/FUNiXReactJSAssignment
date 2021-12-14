@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import dateFormat from "dateformat";
 
-function ModifyStaff(props) {
+function ModifyStaff2(props) {
   const dispatch = useDispatch();
   const [selectedStaff, setSelectedStaff] = useState({
     id: props.staffList[0].id,
@@ -360,4 +360,4 @@ function ModifyStaff(props) {
   );
 }
 
-export default ModifyStaff;
+export default ModifyStaff2;

@@ -27,10 +27,7 @@ function FunctionBar(props) {
           <div className="col-4 col-md-7 col-lg-8 left-align">
             <div className="row">
               {/* Add button */}
-              <div
-                className="col-6 col-md-3"
-                style={{ paddingLeft: 0, paddingRight: "10px" }}
-              >
+              <div className="col-12 col-md-3" style={{ paddingLeft: 0 }}>
                 <Button
                   style={{ marginBottom: "8px" }}
                   color="danger"
@@ -41,7 +38,7 @@ function FunctionBar(props) {
                 </Button>
               </div>
               {/* Modify button */}
-              <div
+              {/* <div
                 id="modify-btn-wrapper"
                 className="col-6 col-md-3"
                 style={{
@@ -56,7 +53,7 @@ function FunctionBar(props) {
                 >
                   <i class="fa fa-edit"></i>
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

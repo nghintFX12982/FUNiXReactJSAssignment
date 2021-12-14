@@ -46,7 +46,7 @@ const dispatchList = [
   { name: "salary", params: "staffsSalary", action: addSalary },
 ];
 
-export const fetchData = (dispatch, params) => {
+export const fetchData = (params) => (dispatch) => {
   fetch(baseUrl + params)
     .then(
       (res) => {
@@ -115,8 +115,7 @@ export const postData = (dispatch, newStaff) => {
 };
 
 // ---------- Modify data to baseUrl ----------
-export const modifyData = (dispatch, modifiedData) => {
-  console.log(modifiedData);
+export const modifyData = (modifiedData) => (dispatch) => {
   fetch(baseUrl + "staffs", {
     method: "PATCH",
     body: JSON.stringify(modifiedData),
@@ -147,7 +146,7 @@ export const modifyData = (dispatch, modifiedData) => {
 };
 
 // ---------- Delete data to baseUrl ----------
-export const deleteData = (dispatch, staffId) => {
+export const deleteData = (staffId) => (dispatch) => {
   fetch(baseUrl + "staffs/" + staffId, {
     method: "DELETE",
     header: { "Content-Type": "application/json" },
