@@ -4,7 +4,6 @@ import ModifyStaff from "./ModifyStaffComponent";
 import React from "react";
 
 function Info(props) {
-  console.log(props);
   if (props.staffs.isLoading) {
     return <Loading />;
   }
